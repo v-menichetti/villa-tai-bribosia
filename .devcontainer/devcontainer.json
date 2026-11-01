@@ -1,0 +1,22 @@
+{
+  "name": "Les Jours de Grasse",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:1-24-bookworm",
+  "forwardPorts": [3000],
+  "portsAttributes": {
+    "3000": { "label": "Les Jours de Grasse", "onAutoForward": "notify" }
+  },
+  "postCreateCommand": "npm install --global npm@11 && npm ci",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "bradlc.vscode-tailwindcss"
+      ],
+      "settings": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+      }
+    }
+  }
+}

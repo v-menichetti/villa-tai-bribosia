@@ -1,0 +1,44 @@
+{
+  "name": "les-jours-de-grasse",
+  "version": "0.1.0",
+  "private": true,
+  "description": "A Mediterranean summer villa website in Grasse, built around editorial design and family stays.",
+  "engines": {
+    "node": ">=24 <25",
+    "npm": ">=11 <12"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint . --max-warnings=0",
+    "typecheck": "next typegen && tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "check": "npm run lint && npm run typecheck && npm run test && npm run format:check"
+  },
+  "dependencies": {
+    "@fontsource/cormorant-garamond": "^5.0.0",
+    "@fontsource/dm-sans": "^5.0.0",
+    "lucide-react": "^0.577.0",
+    "next": "^16.4.3",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "sharp": "^0.35.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.0.0",
+    "@types/node": "^24.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "eslint": "^9.0.0",
+    "eslint-config-next": "^16.4.3",
+    "eslint-config-prettier": "^10.0.0",
+    "prettier": "^3.0.0",
+    "tailwindcss": "^4.0.0",
+    "typescript": "^5.9.0",
+    "vitest": "^4.0.0"
+  }
+}
