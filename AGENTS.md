@@ -4,9 +4,9 @@ Read `README.md`, `docs/DESIGN.md` and `docs/ROADMAP.md` before changing the pro
 
 ## Scope and design
 
-- The approved visual source is `docs/design/approved-homepage.jpeg`: “Les beaux jours”, turquoise photography, cobalt blue, warm ivory and lemon yellow. Preserve this direction; the other concepts were not selected.
+- The current approved visual source is `docs/design/approved-sand-olive.png`: Villa Tai Bribosia, real photography, warm white, sand and olive. This supersedes the previous blue/yellow concept.
 - This repository is a development foundation. Do not describe its initial homepage as the finished photographic implementation.
-- French visitor-facing copy; English code identifiers and repository documentation.
+- French by default, English via a language switch; English code identifiers and repository documentation.
 - Images in the approved mockup are generated or reinterpreted. They are design references, not verified photographs of the rental. Do not extract them and market them as real photos.
 - Unknown data stays unknown. Never infer availability from a price, maximum guests from bed count, or a 7–21 August tariff from neighbouring weeks.
 
@@ -24,3 +24,13 @@ Read `README.md`, `docs/DESIGN.md` and `docs/ROADMAP.md` before changing the pro
 ## Verification
 
 Run `npm run check` and `npm run build` before handing off changes. Check desktop and mobile for layout changes. Report unrun or failed checks honestly.
+
+<!-- BEGIN:nextjs-agent-rules -->
+
+## This is NOT the Next.js you know
+
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
+
+This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
+
+<!-- END:nextjs-agent-rules -->

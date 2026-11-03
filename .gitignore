@@ -12,3 +12,5 @@ npm-debug.log*
 Thumbs.db
 .tools/
 artifacts/
+data/
+*.sqlite*

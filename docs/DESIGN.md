@@ -1,30 +1,9 @@
-# Design & assets
+# Design and content
 
-The selected reference is [approved-homepage.jpeg](design/approved-homepage.jpeg), supplied and approved on 1 November 2026.
+The current approved reference is `design/approved-sand-olive.png`. It supersedes the archived blue/yellow concept. Use warm white #FCFAF6, sand #EAE2D6, olive #4B5940, charcoal #252A23 and bronze accents. Typography: local Lora and DM Sans. Photographic hero, restrained rectangular buttons, airy split layouts and an olive contact banner.
 
-## Visual language
+The generated reference is never used as production photography. Actual house photos come from the updated owner PowerPoint. Content follows that document: ten guests maximum, correctly ordered bedrooms, AC only in kitchen/living room, two shower rooms, six sunbeds, parking for three cars and a trailer, Saturday arrivals from 14:00 and departures before 10:00.
 
-- Immersive pool hero, white editorial headline “Les beaux jours.” and a quiet transparent header.
-- Riviera blue `#163DCC`, warm ivory `#FAF6E9`, lemon yellow `#FFF36E` and deep text `#18332E`.
-- Cormorant Garamond regular/italic and DM Sans are bundled locally as starting typefaces. Tune weight, proportions and spacing against the approved image.
-- Strong scale contrast; large photographs; asymmetrical house composition with an inset bedroom image; a photographic row for the surroundings.
-- Restrained motion that respects `prefers-reduced-motion`. Preserve keyboard navigation and readable contrast over photography.
-- Desktop and mobile need deliberate compositions, not simply scaled screenshots.
+2027 prices come from the original listing because the PowerPoint supplies none. Availability is separate and starts unconfirmed. August 7–21 has no supplied price. Consecutive-week discounts require a personalised quote.
 
-## What the starter implements
-
-Shared palette and typefaces, navigation, section order, French copy, rates, metadata and responsive layouts. It deliberately uses a simple teal hero background until real photography is available. It is not the final visual implementation.
-
-## Image provenance
-
-The approved image is an AI-generated mockup. Even the views inspired by the real house were reinterpreted. It must stay a reference in `docs/design`, not be presented as a real photograph or sliced into production assets.
-
-Originals needed: pool and deck, exterior, all terraces, garden, four bedrooms, living room, kitchen, two bathrooms. Ask for original files rather than thumbnails or WhatsApp-compressed copies. Keep the property’s true dimensions, fittings and appearance.
-
-For the surroundings, use owned/licensed photography of Grasse, Mandelieu-La Napoule and Gourdon. Previous concept sources were the official tourism/municipal pages; their commercial image licences were not established. Do not hotlink or republish those assets without rights confirmation.
-
-Store final web assets under `public/images/` with meaningful names and documented source, credit, permission and alt text. Use responsive Next.js Image sizes and appropriate compression. Never commit private metadata or precise location details without review.
-
-## Content model
-
-Keep factual details in `src/content/villa.ts`; 2027 pricing is in `src/content/rates.ts`. Unknown capacity is `null`. The August gap has a `null` price and all availability is `unconfirmed`. Contact is optional environment configuration.
+French is the default, with English routes and date-preserving language links. The responsive gallery uses native modal focus handling. Avoid autoplay and respect reduced motion. Some supplied images are low resolution; obtain higher-resolution originals before launch if possible. See public/images/README.md for credits.

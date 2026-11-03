@@ -1,25 +1,112 @@
-import { ArrowUpRight } from 'lucide-react';
-
-export function SiteHeader() {
+'use client';
+import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
+import { useState } from 'react';
+import { Sprout, Menu, X } from 'lucide-react';
+import { paths, labels, type Locale, type PageKey } from '@/lib/i18n';
+export function SiteHeader({
+  locale,
+  page,
+}: {
+  locale: Locale;
+  page: PageKey;
+}) {
+  const [open, setOpen] = useState(false);
+  const search = useSearchParams();
+  const query = new URLSearchParams();
+  for (const key of ['arrival', 'departure']) {
+    const v = search.get(key);
+    if (v && /^2027-\d{2}-\d{2}$/.test(v)) query.set(key, v);
+  }
+  const suffix = query.size ? '?' + query.toString() : '';
+  const items: PageKey[] = [
+    'house',
+    'photos',
+    'area',
+    'availability',
+    'contact',
+  ];
   return (
     <header className="site-header">
-      <a
-        className="wordmark"
-        href="#accueil"
-        aria-label="Les Jours de Grasse, accueil"
+      <Link
+        className="brand"
+        href={paths[locale].home}
+        aria-label="Villa Tai Bribosia"
       >
-        Les Jours
-        <br />
-        de Grasse
-      </a>
-      <nav aria-label="Navigation principale">
-        <a href="#villa">La villa</a>
-        <a href="#alentours">Les alentours</a>
-        <a href="#tarifs">L’été 2027</a>
+        <Sprout aria-hidden="true" />
+        <span>
+          VILLA
+          <br />
+          <strong>TAI BRIBOSIA</strong>
+        </span>
+      </Link>
+      <nav
+        className="desktop-nav"
+        aria-label={
+          locale === 'fr' ? 'Navigation principale' : 'Main navigation'
+        }
+      >
+        {items.map((key) => (
+          <Link
+            key={key}
+            href={paths[locale][key]}
+            aria-current={page === key ? 'page' : undefined}
+          >
+            {labels[locale][key]}
+          </Link>
+        ))}
       </nav>
-      <a className="pill" href="#sejour">
-        Préparer mon séjour <ArrowUpRight size={17} aria-hidden="true" />
-      </a>
+      <div className="header-actions">
+        <div
+          className="languages"
+          aria-label={locale === 'fr' ? 'Langue' : 'Language'}
+        >
+          {(['fr', 'en'] as const).map((l) => (
+            <a
+              key={l}
+              href={paths[l][page] + suffix}
+              lang={l}
+              hrefLang={l}
+              aria-current={locale === l ? 'true' : undefined}
+            >
+              {l.toUpperCase()}
+            </a>
+          ))}
+        </div>
+        <Link className="button header-cta" href={paths[locale].availability}>
+          {locale === 'fr' ? 'Préparer mon séjour' : 'Plan my stay'}
+        </Link>
+        <button
+          className="menu-toggle"
+          aria-expanded={open}
+          aria-controls="mobile-menu"
+          aria-label={
+            open
+              ? locale === 'fr'
+                ? 'Fermer le menu'
+                : 'Close menu'
+              : locale === 'fr'
+                ? 'Ouvrir le menu'
+                : 'Open menu'
+          }
+          onClick={() => setOpen(!open)}
+        >
+          {open ? <X /> : <Menu />}
+        </button>
+      </div>
+      {open && (
+        <nav id="mobile-menu" className="mobile-nav">
+          {items.map((key) => (
+            <Link
+              key={key}
+              href={paths[locale][key]}
+              onClick={() => setOpen(false)}
+            >
+              {labels[locale][key]}
+            </Link>
+          ))}
+        </nav>
+      )}
     </header>
   );
 }

@@ -5,7 +5,7 @@ const indexable =
   !['localhost', '127.0.0.1'].includes(siteUrl.hostname);
 
 export const site = {
-  name: 'Les Jours de Grasse',
+  name: 'Villa Tai Bribosia',
   description:
     'Une villa familiale au calme à Grasse Saint-Jacques. Quatre chambres, une piscine privée et trois terrasses pour savourer l’été.',
   url: siteUrl,

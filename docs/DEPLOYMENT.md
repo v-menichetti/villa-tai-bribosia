@@ -1,13 +1,13 @@
 # Deployment
 
-No public deployment or Vercel project has been created during repository setup.
+Use a single Node 24 server with a persistent disk. Run `npm ci`, `npm run check`, `npm run build`, then `npm start`. Set `DATABASE_PATH` to an absolute path on the persistent disk, outside release directories. SQLite creates and seeds its schema automatically, without overwriting edited weeks.
 
-The app uses standard Next.js conventions. A future Vercel import can use the repository root, framework preset Next.js, Node 24, install command `npm ci` and build command `npm run build`. npm 11 is required by the project; ensure the build image uses that major, or set installation to `npx --yes npm@11 ci` and use `npx --yes npm@11 run build` for the build command.
+This implementation is **not suitable for ephemeral serverless filesystems or horizontally replicated instances**. Migrate the database/session/rate-limit adapter before using such hosting. No production infrastructure is provisioned.
 
-Before deploying publicly, complete `ROADMAP.md`, set `SITE_URL` to the final HTTPS domain and confirm `CONTACT_EMAIL`. Keep `SITE_INDEXABLE=false` for previews and until launch approval. Turn it on only in the production environment once ready.
+Set `SITE_URL` to the exact public HTTPS origin, `ADMIN_PASSWORD_HASH`, and email variables from `.env.example`. HTTPS is required for production session cookies. Keep `SITE_INDEXABLE=false` until launch approval. Do not expose the database or environment files through the web server.
 
-There are currently no database migrations, authentication secrets, upload credentials or mail-service keys. Add server-only secrets when the corresponding integration is implemented; do not prefix them with `NEXT_PUBLIC_`.
+`TRUST_PROXY=true` is safe only when the reverse proxy replaces x-forwarded-for with the verified client address. Otherwise leave it false: abuse limits share a single bucket. Back up SQLite using SQLite's backup API or while the application is stopped; copying a live WAL database file alone is not a valid backup. Verify restoration before launch.
 
-The optional contact link uses `mailto:`. It does not guarantee delivery or save any enquiry. A real server-backed enquiry form is a later milestone.
+Owner password setup: `node scripts/admin-password.mjs`. Store the printed password privately and the hash only in server configuration. To revoke all sessions on password rotation, stop the app, delete rows from `sessions`, then restart with the new hash.
 
-Do not add a made-up public URL, placeholder legal identity, fabricated ratings or unverified accommodation structured data.
+Confirm email delivery end to end with the owner before opening the form. Complete operator/hosting legal identity, privacy retention details, prices/fees/terms, and approve all photographs. No payment or automatic reservation is implemented.

@@ -1,15 +1,16 @@
 import type { Metadata } from 'next';
-import '@fontsource/cormorant-garamond/400.css';
-import '@fontsource/cormorant-garamond/400-italic.css';
+import '@fontsource/lora/400.css';
+import '@fontsource/lora/500.css';
 import '@fontsource/dm-sans/400.css';
 import '@fontsource/dm-sans/500.css';
 import './globals.css';
 import { site } from '@/lib/site';
+import { headers } from 'next/headers';
 
 export const metadata: Metadata = {
   metadataBase: site.url,
   title: {
-    default: `${site.name} — Les beaux jours`,
+    default: `${site.name} — Vacances à Grasse`,
     template: `%s | ${site.name}`,
   },
   description: site.description,
@@ -22,14 +23,16 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
+  const locale =
+    (await headers()).get('x-site-language') === 'en' ? 'en' : 'fr';
   return (
-    <html lang="fr">
+    <html lang={locale}>
       <body>
         <a className="skip-link" href="#contenu">
-          Aller au contenu
+          {locale === 'fr' ? 'Aller au contenu' : 'Skip to content'}
         </a>
         {children}
       </body>
