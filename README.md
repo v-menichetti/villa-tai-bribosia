@@ -14,7 +14,7 @@ The approved sand-and-olive design pairs locally bundled Lora and DM Sans with o
 
 Implemented and ready for local review; not publicly deployed. All 13 summer 2027 weeks start **unconfirmed**. Prices do not imply availability. The two weeks from 7 to 21 August have no supplied rate.
 
-The protected `/admin` lets the owner change weekly status and price. SQLite persists changes and revision checks prevent stale edits. Public visitors never see private booking reasons. Contact delivery uses Resend when configured; the form stays disabled otherwise and never displays a fabricated success.
+The protected `/admin` lets the owner change weekly status and price. SQLite persists changes and revision checks prevent stale edits. Public visitors never see private booking reasons. Contact delivery uses Resend when configured; missing configuration returns an honest error and never displays a fabricated success.
 
 ## Run locally
 

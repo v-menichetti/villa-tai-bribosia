@@ -1,43 +1,78 @@
 'use client';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
+import { ChevronLeft, ChevronRight, Pause, Play } from 'lucide-react';
 import { paths, type Locale } from '@/lib/i18n';
 const slides = ['pool', 'terrace', 'terrace-lounge', 'facade'];
 export function Hero({ locale }: { locale: Locale }) {
   const [index, setIndex] = useState(0);
+  const ready = useRef(new Set<number>());
+  const [paused, setPaused] = useState(false);
+  const [hovered, setHovered] = useState(false);
+  useEffect(() => {
+    const media = window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (paused || hovered) return;
+    const timer = setInterval(() => {
+      if (!media.matches && !document.hidden) {
+        setIndex((i) =>
+          ready.current.has((i + 1) % slides.length)
+            ? (i + 1) % slides.length
+            : i,
+        );
+      }
+    }, 6500);
+    return () => clearInterval(timer);
+  }, [paused, hovered]);
+  const change = (i: number) => {
+    if (ready.current.has(i)) setIndex(i);
+  };
   const fr = locale === 'fr';
   return (
     <section
       className="hero"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      onFocusCapture={() => setHovered(true)}
+      onBlurCapture={(e) => {
+        if (!e.currentTarget.contains(e.relatedTarget)) setHovered(false);
+      }}
       aria-label={
         fr ? 'Découvrez la villa en images' : 'Discover the villa in pictures'
       }
     >
-      <Image
-        key={index}
-        className="hero-image"
-        src={`/images/${slides[index]}.webp`}
-        alt={
-          fr
-            ? [
-                'La piscine privée dans son écrin de verdure',
-                'La terrasse et son espace repas',
-                'Le salon de jardin',
-                'La façade de la villa',
-              ][index]
-            : [
-                'The private pool surrounded by greenery',
-                'The terrace and dining area',
-                'The garden lounge',
-                'The villa exterior',
-              ][index]
-        }
-        fill
-        sizes="100vw"
-        priority={index === 0}
-      />
+      {slides.map((slide, i) => (
+        <Image
+          key={slide}
+          className={`hero-image ${i === index ? 'is-active' : ''}`}
+          src={`/images/${slide}.webp`}
+          alt={
+            i === index
+              ? fr
+                ? [
+                    'La piscine privée',
+                    'La terrasse',
+                    'Le salon de jardin',
+                    'La façade de la villa',
+                  ][i]
+                : [
+                    'The private pool',
+                    'The terrace',
+                    'The garden lounge',
+                    'The villa exterior',
+                  ][i]
+              : ''
+          }
+          aria-hidden={i !== index}
+          fill
+          sizes="100vw"
+          loading="eager"
+          fetchPriority={i === 0 ? 'high' : 'auto'}
+          onLoad={() => {
+            ready.current.add(i);
+          }}
+        />
+      ))}
       <div className="hero-shade" />
       <div className="hero-copy">
         <p className="eyebrow">Grasse Saint-Jacques · Côte d’Azur</p>
@@ -67,28 +102,40 @@ export function Hero({ locale }: { locale: Locale }) {
       <button
         className="hero-arrow previous"
         aria-label={fr ? 'Photo précédente' : 'Previous photo'}
-        onClick={() => setIndex((index + slides.length - 1) % slides.length)}
+        onClick={() => change((index + slides.length - 1) % slides.length)}
       >
         <ChevronLeft />
       </button>
       <button
         className="hero-arrow next"
         aria-label={fr ? 'Photo suivante' : 'Next photo'}
-        onClick={() => setIndex((index + 1) % slides.length)}
+        onClick={() => change((index + 1) % slides.length)}
       >
         <ChevronRight />
       </button>
+      <button
+        className="hero-playback"
+        aria-label={
+          paused
+            ? fr
+              ? 'Reprendre le diaporama'
+              : 'Play slideshow'
+            : fr
+              ? 'Mettre le diaporama en pause'
+              : 'Pause slideshow'
+        }
+        onClick={() => setPaused(!paused)}
+      >
+        {paused ? <Play size={16} /> : <Pause size={16} />}
+      </button>
       <div className="hero-pagination">
-        <span aria-live="polite">
-          0{index + 1} / 0{slides.length}
-        </span>
         <div>
           {slides.map((id, i) => (
             <button
               key={id}
               aria-label={`${fr ? 'Afficher la photo' : 'Show photo'} ${i + 1}`}
               aria-pressed={i === index}
-              onClick={() => setIndex(i)}
+              onClick={() => change(i)}
             />
           ))}
         </div>

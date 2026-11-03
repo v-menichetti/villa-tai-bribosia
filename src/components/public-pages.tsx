@@ -1,6 +1,10 @@
+import { LocationSection } from './location-section';
+import { GuestReviews } from './guest-reviews';
 import Link from 'next/link';
 import {
   UsersRound,
+  Trees,
+  House as HouseIcon,
   BedDouble,
   Waves,
   ShowerHead,
@@ -184,6 +188,12 @@ function Facts({ locale }: { locale: Locale }) {
         { icon: BedDouble, text: fr ? '4 chambres' : '4 bedrooms' },
         { icon: Waves, text: fr ? 'Piscine privée' : 'Private pool' },
         { icon: ShowerHead, text: fr ? '2 salles d’eau' : '2 shower rooms' },
+        {
+          icon: CarFront,
+          text: fr ? '3 places de parking' : '3 parking spaces',
+        },
+        { icon: Trees, text: fr ? '300 m² de jardin' : '300 m² garden' },
+        { icon: HouseIcon, text: fr ? '90 m² d’intérieur' : '90 m² indoors' },
       ].map(({ icon: Icon, text }) => (
         <div key={text}>
           <Icon strokeWidth={1.35} aria-hidden="true" />
@@ -342,7 +352,7 @@ function Home({ locale, weeks }: { locale: Locale; weeks: PublicWeek[] }) {
           </Link>
           <Link className="destination" href={paths[locale].area + '#gourdon'}>
             <Photo
-              id="gourdon"
+              id="gourdon-generated"
               alt={
                 fr
                   ? 'Le village perché de Gourdon, vu du nord'
@@ -358,6 +368,8 @@ function Home({ locale, weeks }: { locale: Locale; weeks: PublicWeek[] }) {
           </Link>
         </div>
       </section>
+      <LocationSection locale={locale} />
+      <GuestReviews locale={locale} />
       <ContactBanner locale={locale} />
     </>
   );
@@ -590,37 +602,26 @@ function Area({ locale }: { locale: Locale }) {
               {fr ? 'Préparer une sortie côté mer' : 'Plan a day by the sea'} ↗
             </a>
           </div>
-          <div className="coast-illustration">
-            <Waves strokeWidth={0.7} aria-hidden="true" />
-            <p>
-              Mandelieu
-              <br />
-              La Napoule
-            </p>
-            <span>
-              {fr ? 'Un air de Méditerranée' : 'A Mediterranean escape'}
-            </span>
-          </div>
+          <Photo
+            id="napoule-generated"
+            alt={
+              fr
+                ? 'Illustration du château de La Napoule'
+                : 'Illustration of Château de la Napoule'
+            }
+          />
         </div>
       </section>
       <section id="gourdon" className="container section story-row">
         <div>
           <Photo
-            id="gourdon"
+            id="gourdon-generated"
             alt={
               fr
                 ? 'Gourdon vu depuis la route de Caussols'
                 : 'Gourdon seen from the road to Caussols'
             }
           />
-          <p className="image-credit">
-            MOSSOT ·{' '}
-            <a href="https://commons.wikimedia.org/wiki/File:Gourdon_(Alpes-Maritimes)_-343.jpg">
-              Wikimedia Commons
-            </a>{' '}
-            ·{' '}
-            <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>
-          </p>
         </div>
         <div>
           <p className="eyebrow">
@@ -681,15 +682,9 @@ function Privacy({ locale }: { locale: Locale }) {
             : 'Photographs of the villa and Grasse come from the presentation supplied by the owner.'}
         </p>
         <p>
-          Gourdon : MOSSOT,{' '}
-          <a href="https://commons.wikimedia.org/wiki/File:Gourdon_(Alpes-Maritimes)_-343.jpg">
-            Gourdon (Alpes-Maritimes) -343
-          </a>
-          , <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>
-          .{' '}
           {fr
-            ? 'Image redimensionnée, convertie au format WebP et recadrée à l’affichage.'
-            : 'Image resized, converted to WebP and cropped for display.'}
+            ? 'Les vues de Gourdon et du château de La Napoule sont des illustrations générées par IA, à vocation évocatrice. Le fond de feuillage est également généré.'
+            : 'Views of Gourdon and Château de la Napoule are AI-generated illustrative images. The foliage background is also generated.'}
         </p>
         <p className="notice">
           {fr

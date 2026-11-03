@@ -1,4 +1,5 @@
 'use client';
+import { DateSelect } from './date-select';
 import Link from 'next/link';
 import { useState } from 'react';
 import { Check, Send } from 'lucide-react';
@@ -9,7 +10,6 @@ export function ContactForm({
   weeks,
   initialArrival = '',
   initialDeparture = '',
-  configured,
 }: {
   locale: Locale;
   weeks: PublicWeek[];
@@ -87,13 +87,6 @@ export function ContactForm({
     );
   return (
     <form className="contact-form" onSubmit={submit}>
-      {!configured && (
-        <p className="notice">
-          {fr
-            ? 'Les demandes de séjour ouvriront prochainement. Le formulaire est en cours de préparation.'
-            : 'Enquiries will open soon. The contact form is being prepared.'}
-        </p>
-      )}
       <label>
         {fr ? 'Prénom et nom' : 'Full name'} *
         <input
@@ -121,55 +114,42 @@ export function ContactForm({
         <input name="phone" type="tel" autoComplete="tel" maxLength={40} />
       </label>
       <div className="field-pair">
-        <label>
-          {fr ? 'Arrivée' : 'Arrival'}
-          <select
-            name="arrival"
-            value={arrival}
-            onChange={(e) => {
-              setArrival(e.target.value);
-              setDeparture('');
-            }}
-          >
-            <option value="">{fr ? 'À préciser' : 'Not decided yet'}</option>
-            {weeks
-              .filter((w) => w.status !== 'unavailable')
-              .map((w) => (
-                <option key={w.start} value={w.start}>
-                  {dateLabel(w.start, locale)}
-                </option>
-              ))}
-          </select>
-        </label>
-        <label>
-          {fr ? 'Départ' : 'Departure'}
-          <select
-            name="departure"
-            value={departure}
-            required={!!arrival}
-            disabled={!arrival}
-            onChange={(e) => setDeparture(e.target.value)}
-          >
-            <option value="">{fr ? 'À préciser' : 'Not decided yet'}</option>
-            {weeks
-              .filter(
-                (w) =>
-                  w.end > arrival &&
-                  !weeks.some(
-                    (block) =>
-                      block.start >= arrival &&
-                      block.start < w.end &&
-                      block.status === 'unavailable',
-                  ),
-              )
-              .map((w) => (
-                <option key={w.end} value={w.end}>
-                  {dateLabel(w.end, locale)}
-                </option>
-              ))}
-          </select>
-          {!arrival && <input type="hidden" name="departure" value="" />}
-        </label>
+        <DateSelect
+          name="arrival"
+          label={fr ? 'Arrivée' : 'Arrival'}
+          value={arrival}
+          onChange={(v) => {
+            setArrival(v);
+            setDeparture('');
+          }}
+          placeholder={fr ? 'À préciser' : 'Not decided yet'}
+          options={weeks
+            .filter((w) => w.status !== 'unavailable')
+            .map((w) => ({
+              value: w.start,
+              label: dateLabel(w.start, locale),
+            }))}
+        />
+        <DateSelect
+          name="departure"
+          label={fr ? 'Départ' : 'Departure'}
+          value={departure}
+          onChange={setDeparture}
+          disabled={!arrival}
+          placeholder={fr ? 'À préciser' : 'Not decided yet'}
+          options={weeks
+            .filter(
+              (w) =>
+                w.end > arrival &&
+                !weeks.some(
+                  (b) =>
+                    b.start >= arrival &&
+                    b.start < w.end &&
+                    b.status === 'unavailable',
+                ),
+            )
+            .map((w) => ({ value: w.end, label: dateLabel(w.end, locale) }))}
+        />
       </div>
       <div className="field-pair">
         <label>
@@ -232,7 +212,7 @@ export function ContactForm({
           {error}
         </p>
       )}
-      <button className="button" disabled={pending || !configured}>
+      <button className="button" disabled={pending}>
         {pending
           ? fr
             ? 'Envoi en cours…'

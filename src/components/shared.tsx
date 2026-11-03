@@ -1,6 +1,7 @@
+import { BrandMark } from './brand-mark';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowRight, Sprout } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { paths, type Locale } from '@/lib/i18n';
 export function Photo({
   id,
@@ -42,7 +43,7 @@ export function TextLink({
 export function ContactBanner({ locale }: { locale: Locale }) {
   return (
     <section className="contact-banner">
-      <Sprout className="banner-sprout" aria-hidden="true" />
+      <BrandMark className="banner-emblem" />
       <h2>
         {locale === 'fr' ? 'Parlons de votre séjour' : 'Let’s plan your stay'}
       </h2>

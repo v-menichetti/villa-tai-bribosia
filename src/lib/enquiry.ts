@@ -56,10 +56,10 @@ export function parseEnquiry(input: unknown): Enquiry | null {
     return null;
   return e;
 }
+export const contactRecipient =
+  process.env.CONTACT_EMAIL?.trim() || 'Vmenichetti@hotmail.com';
 export function emailConfigured() {
   return Boolean(
-    process.env.RESEND_API_KEY &&
-    process.env.CONTACT_EMAIL &&
-    process.env.MAIL_FROM,
+    process.env.RESEND_API_KEY && contactRecipient && process.env.MAIL_FROM,
   );
 }

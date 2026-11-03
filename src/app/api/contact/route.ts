@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { emailConfigured, parseEnquiry } from '@/lib/enquiry';
+import { emailConfigured, parseEnquiry, contactRecipient } from '@/lib/enquiry';
 import { consumeLimit, getPublicWeeks } from '@/lib/db';
 import { clientKey, readJson, sameOrigin } from '@/lib/http';
 export const runtime = 'nodejs';
@@ -39,7 +39,7 @@ export async function POST(request: Request) {
       signal: AbortSignal.timeout(12000),
       body: JSON.stringify({
         from: process.env.MAIL_FROM,
-        to: [process.env.CONTACT_EMAIL],
+        to: [process.env.CONTACT_EMAIL?.trim() || contactRecipient],
         reply_to: value.email,
         subject: `Demande de séjour — Villa Tai Bribosia${value.arrival ? ' — ' + value.arrival : ''}`,
         text: `Nom : ${value.name}\nE-mail : ${value.email}\nTéléphone : ${value.phone || 'Non renseigné'}\nLangue : ${value.locale}\nArrivée : ${value.arrival || 'À préciser'}\nDépart : ${value.departure || 'À préciser'}\nAdultes : ${value.adults}\nEnfants : ${value.children}\n\n${value.message}`,

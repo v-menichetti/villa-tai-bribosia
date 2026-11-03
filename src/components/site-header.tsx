@@ -1,8 +1,9 @@
 'use client';
+import { BrandMark } from './brand-mark';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { useState } from 'react';
-import { Sprout, Menu, X } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { paths, labels, type Locale, type PageKey } from '@/lib/i18n';
 export function SiteHeader({
   locale,
@@ -33,12 +34,8 @@ export function SiteHeader({
         href={paths[locale].home}
         aria-label="Villa Tai Bribosia"
       >
-        <Sprout aria-hidden="true" />
-        <span>
-          VILLA
-          <br />
-          <strong>TAI BRIBOSIA</strong>
-        </span>
+        <BrandMark />
+        <span>Villa Tai Bribosia</span>
       </Link>
       <nav
         className="desktop-nav"
