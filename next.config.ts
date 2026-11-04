@@ -6,7 +6,7 @@ const nextConfig: NextConfig = {
   images: {
     localPatterns: [
       { pathname: '/images/**', search: '' },
-      { pathname: '/images/**', search: '?v=20261104' },
+      { pathname: '/images/**', search: '?v=20261104b' },
     ],
   },
   serverExternalPackages: ['node:sqlite'],

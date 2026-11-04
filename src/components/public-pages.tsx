@@ -54,6 +54,10 @@ export function PublicPage({
     return (
       <>
         <PageIntro
+          image="pool-sunset"
+          imageAlt={
+            fr ? 'Une soirée au bord de la piscine' : 'An evening by the pool'
+          }
           eyebrow={fr ? 'La villa en images' : 'In pictures'}
           title={
             fr ? 'Un avant-goût des vacances.' : 'A taste of your holiday.'
@@ -159,9 +163,19 @@ export function PublicPage({
     return (
       <>
         <PageIntro
+          image="terrace"
+          imageAlt={
+            fr
+              ? 'La terrasse pour vos moments en famille'
+              : 'The terrace for family moments'
+          }
           eyebrow={fr ? 'Contacter la propriétaire' : 'Contact the owner'}
           title={fr ? 'Parlons de votre séjour.' : 'Let’s plan your stay.'}
-        />
+        >
+          {fr
+            ? 'Des dates en tête, une question sur la maison ? Votre prochaine parenthèse au soleil commence ici.'
+            : 'Have dates in mind, or a question about the villa? Your next getaway in the sun starts here.'}
+        </PageIntro>
         <section className="container contact-layout section-bottom">
           <div className="contact-intro">
             <p className="lead">
@@ -169,10 +183,22 @@ export function PublicPage({
                 ? 'Une question sur la maison ou une envie de vacances à Grasse ? Partagez vos dates et le nombre de voyageurs. Nous vous répondrons par e-mail.'
                 : 'A question about the villa, or thinking of a holiday in Grasse? Share your dates and the number of guests. We will reply by email.'}
             </p>
-            <Photo
-              id="terrace"
-              alt={fr ? 'La terrasse de la villa' : 'The villa terrace'}
-            />
+            <div className="contact-details">
+              <span>{fr ? '01 · Votre séjour' : '01 · Your stay'}</span>
+              <p>
+                {fr
+                  ? 'Indiquez vos dates et le nombre de voyageurs.'
+                  : 'Share your dates and the number of guests.'}
+              </p>
+              <span>
+                {fr ? '02 · Un échange direct' : '02 · A direct conversation'}
+              </span>
+              <p>
+                {fr
+                  ? 'La propriétaire vous répond personnellement par e-mail.'
+                  : 'The owner will reply personally by email.'}
+              </p>
+            </div>
             <h2>Villa Tai Bribosia</h2>
             <p>Grasse Saint-Jacques · Côte d’Azur</p>
             <p className="fine-print">
@@ -394,6 +420,12 @@ function House({ locale }: { locale: Locale }) {
   return (
     <>
       <PageIntro
+        image="facade"
+        imageAlt={
+          fr
+            ? 'La maison et sa bignone en fleurs'
+            : 'The villa and its flowering trumpet vine'
+        }
         eyebrow={
           fr
             ? 'La maison · jusqu’à 10 personnes'
@@ -549,6 +581,12 @@ function Area({ locale }: { locale: Locale }) {
   return (
     <>
       <PageIntro
+        image="gourdon-generated"
+        imageAlt={
+          fr
+            ? 'Les collines et le village de Gourdon'
+            : 'The hills and village of Gourdon'
+        }
         eyebrow={fr ? 'Autour de la villa' : 'Around the villa'}
         title={
           fr ? 'Grasse, la mer, les collines.' : 'Grasse, the sea, the hills.'

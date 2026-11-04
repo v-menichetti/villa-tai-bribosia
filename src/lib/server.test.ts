@@ -64,6 +64,36 @@ afterAll(() => {
   rmSync(dir, { recursive: true, force: true });
 });
 describe('protected owner calendar', () => {
+  it('authenticates through the Codespaces public URL and permits authenticated week updates', async () => {
+    vi.stubEnv('CODESPACES', 'true');
+    vi.stubEnv('CODESPACE_NAME', 'villa-test-abc');
+    vi.stubEnv('GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN', 'app.github.dev');
+    vi.stubEnv('PORT', '3000');
+    try {
+      const origin = 'https://villa-test-abc-3000.app.github.dev';
+      const response = await login(
+        request('/api/admin/login', { password }, origin),
+      );
+      expect(response.status).toBe(200);
+      state.token = response.cookies.get('villa_session')!.value;
+      const week = getWeeks().at(-1)!;
+      expect(
+        (
+          await update(
+            request(
+              '/api/admin/weeks',
+              { ...week, status: 'blocked' },
+              origin,
+              'PATCH',
+            ),
+          )
+        ).status,
+      ).toBe(200);
+      expect(getWeeks().at(-1)!.status).toBe('blocked');
+    } finally {
+      vi.stubEnv('CODESPACES', 'false');
+    }
+  });
   it('rejects unauthenticated edits and cross-origin login', async () => {
     expect(
       (

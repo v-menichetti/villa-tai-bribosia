@@ -1,5 +1,13 @@
 # Photo provenance
 
+## Facade reframing
+
+On 2026-11-04, built-in ImageGen edited the previously retouched facade at the owner's request. `facade.webp` now has an extended upper sky, reduced gravel foreground and orange trumpet flowers on the existing Campsis vine. Export: WebP quality 92. Original review versions remain in `docs/photography`. Image URLs use `v=20261104b`.
+
+Exact prompt:
+
+> Edit this exact villa photograph. Reframe by extending the image above the existing roof and trees, cropping much of the bottom gravel foreground. House must be centred vertically and horizontally; show generous natural blue summer sky above roof (approximately upper quarter of frame), house across middle, only a modest strip of driveway along bottom (15-20%). Keep original landscape 4:3 proportions. Preserve exact architecture, beige stucco, tiled roof, windows and shutters, terrace railing, umbrella, pots, driveway and tree locations. On the RIGHT facade the climbing vine is a bignone (Campsis): make this existing vine bloom with natural clusters of orange/coral trumpet-shaped flowers distributed realistically through its foliage. Do not replace plant species or create a solid floral wall. Professional natural Mediterranean property photography, bright balanced daylight, softer shadows, authentic details. Do not add furniture, openings, extra floors, pool, new buildings or text. Output a single finished photograph.
+
 House and Grasse source photographs were extracted from the owner's updated `Villa Tai Bribosia, au calme avec piscine 2027 (1).pptx`. On 2026-11-03 the owner requested activating all 13 AI-retouched house versions from `docs/photography`; these now replace their matching public assets. Original reference exports remain in that comparison folder, with full originals retained outside the repository. Grasse images remain unchanged. Image URLs have a new version parameter to bypass previous optimized-image caches.
 
 `aerial-overhead.webp` and `aerial-oblique.webp` are AI reconstructions based on owner-supplied Google Earth screenshots and ground photos. `pool-sunset.webp` is an AI lighting transformation of the original pool photo. These three illustrations are labelled in French and English gallery captions and credits; they are not documentary drone/sunset photographs. All are exported as WebP quality 90. See `docs/photography/GENERATED-VIEWS.md` for prompts.

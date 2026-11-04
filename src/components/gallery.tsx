@@ -65,7 +65,7 @@ export function Gallery({ locale }: { locale: Locale }) {
           >
             <span className="gallery-image">
               <Image
-                src={`/images/${p.id}.webp?v=20261104`}
+                src={`/images/${p.id}.webp?v=20261104b`}
                 alt={p[locale]}
                 fill
                 sizes="(max-width: 700px) 100vw, 50vw"
@@ -100,7 +100,7 @@ export function Gallery({ locale }: { locale: Locale }) {
             </button>
             <div className="lightbox-photo">
               <Image
-                src={`/images/${visible[selected].id}.webp?v=20261104`}
+                src={`/images/${visible[selected].id}.webp?v=20261104b`}
                 alt={visible[selected][locale]}
                 fill
                 sizes="90vw"

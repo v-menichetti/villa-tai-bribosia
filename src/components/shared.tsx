@@ -17,7 +17,7 @@ export function Photo({
   return (
     <div className={`photo ${className}`}>
       <Image
-        src={`/images/${id}.webp?v=20261104`}
+        src={`/images/${id}.webp?v=20261104b`}
         alt={alt}
         fill
         sizes="(max-width: 700px) 100vw, (max-width: 1100px) 70vw, 1200px"
@@ -73,11 +73,26 @@ export function PageIntro({
   eyebrow,
   title,
   children,
+  image,
+  imageAlt,
 }: {
   eyebrow: string;
   title: string;
   children?: React.ReactNode;
+  image?: string;
+  imageAlt?: string;
 }) {
+  if (image)
+    return (
+      <section className="booking-intro editorial-intro container">
+        <div>
+          <p className="eyebrow">{eyebrow}</p>
+          <h1>{title}</h1>
+          {children && <p className="lead">{children}</p>}
+        </div>
+        <Photo id={image} alt={imageAlt || ''} priority />
+      </section>
+    );
   return (
     <div className="page-intro container">
       <p className="eyebrow">{eyebrow}</p>

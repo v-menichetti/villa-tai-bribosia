@@ -1,5 +1,7 @@
 # Design and content
 
+The booking page's photographic split introduction is now shared by Contact, Villa, Photos and Explore. Contact pairs a soft olive information panel with a raised white form. Bedroom cards, destination tiles, gallery items and story photographs use restrained borders, rounded corners, sand offsets and soft shadows. Mobile layouts stack without changing form behaviour. The facade was reframed with more sky, less foreground gravel and flowering Campsis on the existing right-hand vine.
+
 The current approved reference is `design/approved-sand-olive.png`. It supersedes the archived blue/yellow concept. Use warm white #FCFAF6, sand #EAE2D6, olive #4B5940, charcoal #252A23 and bronze accents. Typography: local Lora and DM Sans. Photographic hero, restrained rectangular buttons, airy split layouts and an olive contact banner.
 
 The generated reference is never used as production photography. Actual house photos come from the updated owner PowerPoint. Content follows that document: ten guests maximum, correctly ordered bedrooms, AC only in kitchen/living room, two shower rooms, six sunbeds, parking for three cars and a trailer, Saturday arrivals from 14:00 and departures before 10:00.

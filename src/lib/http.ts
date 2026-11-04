@@ -1,11 +1,30 @@
 import { createHash } from 'node:crypto';
 import { site } from './site';
 export function sameOrigin(request: Request) {
+  const origin = request.headers.get('origin');
+  if (!origin || origin === 'null') return false;
+  const local = new URL(request.url);
+  // Codespaces terminates HTTPS before forwarding to the local Next server.
+  // Derive the exact trusted public host from platform environment variables,
+  // never from caller-controlled Host or X-Forwarded-Host headers.
+  const name = process.env.CODESPACE_NAME;
+  const domain = process.env.GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN;
+  const port = process.env.PORT || local.port || '3000';
+  if (
+    process.env.CODESPACES === 'true' &&
+    name &&
+    /^[a-z0-9-]+$/.test(name) &&
+    domain &&
+    /^[a-z0-9.-]+$/.test(domain) &&
+    /^\d+$/.test(port) &&
+    Number(port) > 0 &&
+    Number(port) <= 65535 &&
+    origin === `https://${name}-${port}.${domain}`
+  )
+    return true;
   return (
-    request.headers.get('origin') ===
-    (process.env.NODE_ENV === 'production'
-      ? site.url.origin
-      : new URL(request.url).origin)
+    origin ===
+    (process.env.NODE_ENV === 'production' ? site.url.origin : local.origin)
   );
 }
 export function clientKey(request: Request) {
