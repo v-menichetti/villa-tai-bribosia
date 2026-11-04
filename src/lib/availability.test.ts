@@ -1,29 +1,36 @@
-import { describe, expect, it } from 'vitest';
+import { beforeAll, afterAll, describe, expect, it, vi } from 'vitest';
 import { initialWeeks, publicWeek, validWeekUpdate } from './availability';
 import { parseEnquiry } from './enquiry';
 import { paths, resolvePage } from './i18n';
+beforeAll(() => {
+  vi.useFakeTimers({ toFake: ['Date'] });
+  vi.setSystemTime(new Date('2026-11-04T12:00:00Z'));
+});
+afterAll(() => vi.useRealTimers());
 describe('weekly stays', () => {
-  it('seeds exactly 13 Saturday stays, never inventing availability or August prices', () => {
+  it('opens Saturday stays from early June through the second September week', () => {
     const weeks = initialWeeks();
-    expect(weeks).toHaveLength(13);
+    expect(weeks).toHaveLength(15);
     expect(
       weeks.every(
-        (w) =>
-          new Date(w.start).getUTCDay() === 6 && w.status === 'unconfirmed',
+        (w) => new Date(w.start).getUTCDay() === 6 && w.status === 'available',
       ),
     ).toBe(true);
     expect(weeks.filter((w) => w.price === null).map((w) => w.start)).toEqual([
+      '2027-06-05',
       '2027-08-07',
       '2027-08-14',
+      '2027-09-11',
     ]);
-    expect(weeks.at(-1)?.end).toBe('2027-09-11');
+    expect(weeks.at(-1)?.end).toBe('2027-09-18');
   });
   it('keeps private booking reasons and revisions out of the public response', () => {
     for (const status of ['option', 'booked', 'blocked'] as const)
       expect(publicWeek({ ...initialWeeks()[0], status })).toEqual({
-        start: '2027-06-12',
-        end: '2027-06-19',
-        price: 990,
+        start: '2027-06-05',
+        end: '2027-06-12',
+        price: null,
+        expired: false,
         status: 'unavailable',
       });
   });

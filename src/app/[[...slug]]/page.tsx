@@ -1,3 +1,4 @@
+import { seasonYear } from '@/lib/season';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { SiteHeader } from '@/components/site-header';
@@ -24,8 +25,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         : labels[locale][page],
     description:
       locale === 'fr'
-        ? 'Une villa familiale au calme à Grasse Saint-Jacques. 10 personnes, 4 chambres, piscine privée et terrasses. Découvrez la maison et préparez votre été 2027.'
-        : 'A peaceful family villa in Grasse Saint-Jacques. 10 guests, 4 bedrooms, a private pool and terraces. Explore the villa and plan your summer 2027.',
+        ? `Une villa familiale au calme à Grasse Saint-Jacques. 10 personnes, 4 chambres, piscine privée et terrasses. Découvrez la maison et préparez votre été ${seasonYear()}.`
+        : `A peaceful family villa in Grasse Saint-Jacques. 10 guests, 4 bedrooms, a private pool and terraces. Explore the villa and plan your summer ${seasonYear()}.`,
     alternates: {
       canonical: paths[locale][page],
       languages: {

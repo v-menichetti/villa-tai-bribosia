@@ -2,7 +2,6 @@
 export const villa = {
   name: 'Villa Tai Bribosia',
   location: 'Grasse Saint-Jacques',
-  season: 2027,
   bedrooms: 4,
   maxGuests: 10,
   bathrooms: 2,
@@ -10,22 +9,16 @@ export const villa = {
 } as const;
 export const photographs = [
   {
-    id: 'aerial-overhead',
-    category: 'aerial',
-    fr: 'La villa vue du ciel · reconstitution IA',
-    en: 'The villa from above · AI reconstruction',
-  },
-  {
     id: 'aerial-oblique',
     category: 'aerial',
-    fr: 'La maison et sa piscine vues du ciel · reconstitution IA',
-    en: 'The house and pool from above · AI reconstruction',
+    fr: 'La maison et sa piscine vues du ciel',
+    en: 'The house and pool from above',
   },
   {
     id: 'pool-sunset',
     category: 'outdoors',
-    fr: 'Un ciel flamboyant au bord de la piscine · ambiance créée par IA',
-    en: 'A blazing sunset by the pool · AI-created atmosphere',
+    fr: 'Un ciel flamboyant au bord de la piscine',
+    en: 'A blazing sunset by the pool',
   },
   {
     id: 'pool',

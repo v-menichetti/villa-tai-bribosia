@@ -18,10 +18,11 @@ vi.mock('next/headers', () => ({
   }),
 }));
 import { db, getWeeks } from './db';
-import { authenticated } from './auth';
+import { authenticated, verifyPassword } from './auth';
 import { POST as login } from '@/app/api/admin/login/route';
 import { POST as logout } from '@/app/api/admin/logout/route';
 import { PATCH as update } from '@/app/api/admin/weeks/route';
+import { POST as passwordChange } from '@/app/api/admin/password/route';
 import { POST as contact } from '@/app/api/contact/route';
 const dir = mkdtempSync(join(tmpdir(), 'villa-test-'));
 const password = 'test-only-not-a-real-credential';
@@ -38,6 +39,8 @@ function request(
   });
 }
 beforeAll(() => {
+  vi.useFakeTimers({ toFake: ['Date'] });
+  vi.setSystemTime(new Date('2026-11-04T12:00:00Z'));
   vi.stubEnv('DATABASE_PATH', join(dir, 'test.sqlite'));
   const salt = '0123456789abcdef0123456789abcdef';
   vi.stubEnv(
@@ -46,11 +49,15 @@ beforeAll(() => {
   );
 });
 beforeEach(() => {
+  vi.setSystemTime(new Date('2026-11-04T12:00:00Z'));
   state.token = '';
-  db().exec('DELETE FROM sessions; DELETE FROM limits');
+  db().exec(
+    "DELETE FROM sessions; DELETE FROM limits; DELETE FROM settings WHERE key='admin-password'",
+  );
   vi.unstubAllGlobals();
 });
 afterAll(() => {
+  vi.useRealTimers();
   db().close();
   vi.unstubAllEnvs();
   vi.unstubAllGlobals();
@@ -79,6 +86,7 @@ describe('protected owner calendar', () => {
     state.token = response.cookies.get('villa_session')!.value;
     expect(await authenticated()).toBe(true);
     const week = getWeeks()[0];
+    expect(Object.getPrototypeOf(week)).toBe(Object.prototype);
     const body = { ...week, status: 'available', price: 1050 };
     expect(
       (await update(request('/api/admin/weeks', body, undefined, 'PATCH')))
@@ -155,5 +163,77 @@ describe('mail delivery', () => {
         )
       ).status,
     ).toBe(409);
+  });
+});
+
+describe('season rollover and owner credentials', () => {
+  it('opens the next season once and preserves both seasons and subsequent edits', () => {
+    const old = getWeeks()[0];
+    db()
+      .prepare("UPDATE weeks SET status='booked' WHERE start=?")
+      .run(old.start);
+    vi.setSystemTime(new Date('2027-09-30T21:59:00Z'));
+    expect(getWeeks()[0].start.startsWith('2027')).toBe(true);
+    vi.setSystemTime(new Date('2027-09-30T22:00:00Z'));
+    const next = getWeeks();
+    expect(
+      next.every((w) => w.start.startsWith('2028') && w.status === 'available'),
+    ).toBe(true);
+    db()
+      .prepare("UPDATE weeks SET status='blocked' WHERE start=?")
+      .run(next[0].start);
+    expect(getWeeks()[0].status).toBe('blocked');
+    expect(
+      db().prepare('SELECT status FROM weeks WHERE start=?').get(old.start),
+    ).toMatchObject({ status: 'booked' });
+  });
+  it('changes the password durably and revokes previous sessions', async () => {
+    const loginResponse = await login(
+      request('/api/admin/login', { password }),
+    );
+    state.token = loginResponse.cookies.get('villa_session')!.value;
+    const previousToken = state.token;
+    expect(
+      (
+        await passwordChange(
+          request('/api/admin/password', {
+            currentPassword: 'wrong',
+            newPassword: 'new-test-password',
+            confirmPassword: 'new-test-password',
+          }),
+        )
+      ).status,
+    ).toBe(400);
+    const response = await passwordChange(
+      request('/api/admin/password', {
+        currentPassword: password,
+        newPassword: 'new-test-password',
+        confirmPassword: 'new-test-password',
+      }),
+    );
+    expect(response.status).toBe(200);
+    state.token = previousToken;
+    expect(await authenticated()).toBe(false);
+    state.token = response.cookies.get('villa_session')!.value;
+    expect(await authenticated()).toBe(true);
+    expect(await verifyPassword(password)).toBe(false);
+    expect(await verifyPassword('new-test-password')).toBe(true);
+    expect(
+      db()
+        .prepare("SELECT value FROM settings WHERE key='admin-password'")
+        .get(),
+    ).toMatchObject({ value: expect.stringMatching(/^scrypt:/) });
+  });
+  it('requires authentication and same-origin for password changes', async () => {
+    expect(
+      (await passwordChange(request('/api/admin/password', {}))).status,
+    ).toBe(401);
+    expect(
+      (
+        await passwordChange(
+          request('/api/admin/password', {}, 'https://attacker.invalid'),
+        )
+      ).status,
+    ).toBe(401);
   });
 });

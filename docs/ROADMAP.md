@@ -14,7 +14,7 @@
 
 - Owner reviews wording, photos and actual weekly availability
 - Confirm August 7–21 prices and all fees, deposits and cancellation terms
-- Configure owner password, verified sender domain and recipient email
+- Change initial owner password; configure verified sender domain and recipient email
 - Select persistent-disk Node hosting or migrate storage for serverless hosting
 - Confirm domain and HTTPS; test real email delivery and database restore
 - Complete legal identity, hosting details and privacy retention information

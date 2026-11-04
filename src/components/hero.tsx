@@ -45,7 +45,7 @@ export function Hero({ locale }: { locale: Locale }) {
         <Image
           key={slide}
           className={`hero-image ${i === index ? 'is-active' : ''}`}
-          src={`/images/${slide}.webp?v=20261103`}
+          src={`/images/${slide}.webp?v=20261104`}
           alt={
             i === index
               ? fr

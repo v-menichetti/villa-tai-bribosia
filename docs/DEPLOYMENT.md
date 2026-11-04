@@ -4,10 +4,10 @@ Use a single Node 24 server with a persistent disk. Run `npm ci`, `npm run check
 
 This implementation is **not suitable for ephemeral serverless filesystems or horizontally replicated instances**. Migrate the database/session/rate-limit adapter before using such hosting. No production infrastructure is provisioned.
 
-Set `SITE_URL` to the exact public HTTPS origin, `ADMIN_PASSWORD_HASH`, and email variables from `.env.example`. HTTPS is required for production session cookies. Keep `SITE_INDEXABLE=false` until launch approval. Do not expose the database or environment files through the web server.
+Set `SITE_URL` to the exact public HTTPS origin and email variables from `.env.example`. HTTPS is required for production session cookies. Keep `SITE_INDEXABLE=false` until launch approval. Do not expose the database or environment files through the web server.
 
 `TRUST_PROXY=true` is safe only when the reverse proxy replaces x-forwarded-for with the verified client address. Otherwise leave it false: abuse limits share a single bucket. Back up SQLite using SQLite's backup API or while the application is stopped; copying a live WAL database file alone is not a valid backup. Verify restoration before launch.
 
-Owner password setup: `node scripts/admin-password.mjs`. Store the printed password privately and the hash only in server configuration. To revoke all sessions on password rotation, stop the app, delete rows from `sessions`, then restart with the new hash.
+Change the bootstrap owner password in `/admin` → **Mot de passe** before public launch. Rotation requires the current password, writes a salted scrypt hash to SQLite and revokes previous sessions. The saved database hash takes precedence over `ADMIN_PASSWORD_HASH`; the environment only overrides the initial bootstrap hash. Preserve and back up the database, including its settings table, across deployments.
 
 Confirm email delivery end to end with the owner before opening the form. Complete operator/hosting legal identity, privacy retention details, prices/fees/terms, and approve all photographs. No payment or automatic reservation is implemented.

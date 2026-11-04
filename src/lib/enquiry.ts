@@ -1,3 +1,4 @@
+import { parisDate } from './season';
 import { initialWeeks } from './availability';
 export type Enquiry = {
   name: string;
@@ -51,7 +52,8 @@ export function parseEnquiry(input: unknown): Enquiry | null {
     e.arrival &&
     (!initialWeeks().some((w) => w.start === e.arrival) ||
       !initialWeeks().some((w) => w.end === e.departure) ||
-      e.departure <= e.arrival)
+      e.departure <= e.arrival ||
+      e.arrival <= parisDate())
   )
     return null;
   return e;

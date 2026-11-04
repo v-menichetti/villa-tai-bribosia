@@ -11,3 +11,7 @@ The unlicensed tourism images used in earlier mockups are not included. The coas
 ## November visual refinement
 
 Built-in ImageGen created three project assets: `olive-footer.webp` (dark low-contrast olive branches, panoramic, quiet centre), `napoule-generated.webp` (summer editorial illustration of the seaside castle), and `gourdon-generated.webp` (warm panoramic hilltop village illustration). These are AI illustrations, not documentary photographs; the public credits disclose this. The former Gourdon photo remains archived with its original attribution in this file but is no longer displayed.
+
+## November 4 updates
+
+The owner requested removing photo-origin labels from the public pages; this file retains the provenance. The overhead aerial is no longer displayed. The oblique aerial was relit with built-in ImageGen: preserve all geometry, change only to restrained warm golden-hour light, no orange filter or new objects. The sunset was regenerated from original pool/terrace photographs and the oblique aerial: a plausible low deck-edge viewpoint across the kidney-shaped pool toward the raised terrace, modest beige villa, coral/gold evening sky, without the foreground spiky plant. Both outputs are illustrative reconstructions and use WebP quality 90. URLs now use `v=20261104`.

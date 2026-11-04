@@ -12,7 +12,7 @@ The approved sand-and-olive design pairs locally bundled Lora and DM Sans with o
 
 ## Current status
 
-Implemented and ready for local review; not publicly deployed. All 13 summer 2027 weeks start **unconfirmed**. Prices do not imply availability. The two weeks from 7 to 21 August have no supplied rate.
+Implemented and ready for local review; not publicly deployed. At the owner’s request, every new season starts available. The calendar runs from the first Saturday in June through the week beginning on the second Saturday in September. On October 1 (Europe/Paris), the website automatically opens the following year without overwriting existing seasons or edits. Started weeks are no longer bookable. The two weeks from 7 to 21 August have no supplied rate.
 
 The protected `/admin` lets the owner change weekly status and price. SQLite persists changes and revision checks prevent stale edits. Public visitors never see private booking reasons. Contact delivery uses Resend when configured; missing configuration returns an honest error and never displays a fabricated success.
 
@@ -29,7 +29,7 @@ Open http://localhost:3000. Copy `.env.example` to `.env.local` to configure ser
 
 ## Owner access and email
 
-Run `node scripts/admin-password.mjs`, keep the generated password in a password manager, and set the generated `ADMIN_PASSWORD_HASH` server-side. Restart the server and visit `/admin`. Sessions expire after 24 hours. Password rotation should also clear existing sessions in the database.
+Visit `/admin` and use the initial password supplied by the owner in the project conversation. Only its scrypt hash is bundled server-side. An optional `ADMIN_PASSWORD_HASH` overrides this bootstrap value until the first password change. Use the **Mot de passe** tab to change it before public launch. The new salted hash is stored in SQLite, takes precedence over the environment, and revokes old sessions. Sessions expire after 24 hours. Preserve the persistent database across deployments; never expose the initial password in public UI or docs.
 
 For email, configure `RESEND_API_KEY`, a verified-domain `MAIL_FROM`, and the owner's `CONTACT_EMAIL`. Never commit these values. The implementation sends plain-text enquiries with the visitor as Reply-To; confirmation remains manual.
 

@@ -17,7 +17,7 @@ export function SiteHeader({
   const query = new URLSearchParams();
   for (const key of ['arrival', 'departure']) {
     const v = search.get(key);
-    if (v && /^2027-\d{2}-\d{2}$/.test(v)) query.set(key, v);
+    if (v && /^\d{4}-\d{2}-\d{2}$/.test(v)) query.set(key, v);
   }
   const suffix = query.size ? '?' + query.toString() : '';
   const items: PageKey[] = [

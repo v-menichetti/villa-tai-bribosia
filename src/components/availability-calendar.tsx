@@ -1,6 +1,6 @@
 'use client';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
 import { dateLabel, paths, priceLabel, type Locale } from '@/lib/i18n';
@@ -32,6 +32,18 @@ export function AvailabilityCalendar({
     query.set('departure', week.end);
     router.replace(pathname + '?' + query.toString(), { scroll: false });
   }
+  const year = Number(weeks[0]?.start.slice(0, 4));
+  useEffect(() => {
+    const refresh = () => {
+      if (!document.hidden) router.refresh();
+    };
+    const timer = setInterval(refresh, 30000);
+    window.addEventListener('focus', refresh);
+    return () => {
+      clearInterval(timer);
+      window.removeEventListener('focus', refresh);
+    };
+  }, [router]);
   const fr = locale === 'fr';
   const selection = selectedWeek;
   const statusNames = {
@@ -40,8 +52,8 @@ export function AvailabilityCalendar({
     unconfirmed: fr ? 'À confirmer' : 'To confirm',
   };
   function renderMonth(m: number) {
-    const first = (new Date(Date.UTC(2027, m, 1)).getUTCDay() + 6) % 7;
-    const total = new Date(Date.UTC(2027, m + 1, 0)).getUTCDate();
+    const first = (new Date(Date.UTC(year, m, 1)).getUTCDay() + 6) % 7;
+    const total = new Date(Date.UTC(year, m + 1, 0)).getUTCDate();
     return (
       <div className="calendar-month" key={m}>
         <h3>
@@ -49,7 +61,7 @@ export function AvailabilityCalendar({
             month: 'long',
             year: 'numeric',
             timeZone: 'UTC',
-          }).format(new Date(Date.UTC(2027, m, 1)))}
+          }).format(new Date(Date.UTC(year, m, 1)))}
         </h3>
         <div className="calendar-grid">
           {(fr
@@ -64,14 +76,14 @@ export function AvailabilityCalendar({
             <span key={'blank' + i} />
           ))}
           {Array.from({ length: total }, (_, i) => {
-            const iso = `2027-${String(m + 1).padStart(2, '0')}-${String(i + 1).padStart(2, '0')}`;
+            const iso = `${year}-${String(m + 1).padStart(2, '0')}-${String(i + 1).padStart(2, '0')}`;
             const week = weeks.find((w) => iso >= w.start && iso < w.end);
             const canSelect = week && week.status !== 'unavailable';
             return (
               <button
                 key={iso}
                 disabled={!canSelect}
-                className={`calendar-day ${week?.status || 'outside'} ${week?.start === selected ? 'selected' : ''}`}
+                className={`calendar-day ${week?.expired ? 'expired' : week?.status || 'outside'} ${week?.start === selected ? 'selected' : ''}`}
                 aria-pressed={week?.start === selected}
                 aria-label={`${dateLabel(iso, locale)}${week ? ` — ${statusNames[week.status]} — ${fr ? 'semaine du' : 'week of'} ${dateLabel(week.start, locale)}` : ''}`}
                 onClick={() => week && setSelected(week.start)}
@@ -95,7 +107,7 @@ export function AvailabilityCalendar({
           >
             <ChevronLeft size={21} />
           </button>
-          <span>{fr ? 'Été 2027' : 'Summer 2027'}</span>
+          <span>{`${fr ? 'Été' : 'Summer'} ${year}`}</span>
           <button
             aria-label={fr ? 'Mois suivant' : 'Next month'}
             disabled={month === 8}
@@ -111,12 +123,18 @@ export function AvailabilityCalendar({
           </div>
         </div>
         <div className="calendar-legend">
-          {Object.entries(statusNames).map(([key, label]) => (
-            <span key={key}>
-              <i className={key} />
-              {label}
-            </span>
-          ))}
+          {Object.entries(statusNames)
+            .filter(
+              ([key]) =>
+                key !== 'unconfirmed' ||
+                weeks.some((week) => week.status === 'unconfirmed'),
+            )
+            .map(([key, label]) => (
+              <span key={key}>
+                <i className={key} />
+                {label}
+              </span>
+            ))}
           <span>
             <i className="selected" />
             {fr ? 'Sélection' : 'Selected'}

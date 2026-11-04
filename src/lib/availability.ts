@@ -1,3 +1,4 @@
+import { firstSaturday, parisDate, seasonYear } from './season';
 import { rates } from '@/content/rates';
 export const statuses = [
   'unconfirmed',
@@ -16,38 +17,43 @@ export type Week = {
 };
 export type PublicWeek = Omit<Week, 'status' | 'revision'> & {
   status: 'unconfirmed' | 'available' | 'unavailable';
+  expired: boolean;
 };
 export function addDays(date: string, days: number): string {
   const d = new Date(date + 'T12:00:00Z');
   d.setUTCDate(d.getUTCDate() + days);
   return d.toISOString().slice(0, 10);
 }
-export function initialWeeks(): Week[] {
+export function initialWeeks(year = seasonYear()): Week[] {
   const weeks: Week[] = [];
   for (
-    let start = '2027-06-12';
-    start < '2027-09-11';
+    let start = firstSaturday(year, 6);
+    start < addDays(firstSaturday(year, 9), 14);
     start = addDays(start, 7)
   ) {
     weeks.push({
       start,
       end: addDays(start, 7),
       price:
-        rates.find((r) => start >= r.start && start < r.end)?.weeklyPriceEur ??
-        null,
-      status: 'unconfirmed',
+        year === 2027
+          ? (rates.find((r) => start >= r.start && start < r.end)
+              ?.weeklyPriceEur ?? null)
+          : null,
+      status: 'available',
       revision: 0,
     });
   }
   return weeks;
 }
-export function publicWeek(week: Week): PublicWeek {
+export function publicWeek(week: Week, now = new Date()): PublicWeek {
   return {
     start: week.start,
     end: week.end,
     price: week.price,
+    expired: week.start <= parisDate(now),
     status:
-      week.status === 'available' || week.status === 'unconfirmed'
+      week.start > parisDate(now) &&
+      (week.status === 'available' || week.status === 'unconfirmed')
         ? week.status
         : 'unavailable',
   };
@@ -58,7 +64,7 @@ export function validWeekUpdate(
   if (!value || typeof value !== 'object') return false;
   const v = value as Record<string, unknown>;
   return (
-    initialWeeks().some((w) => w.start === v.start) &&
+    initialWeeks().some((w) => w.start === v.start && w.start > parisDate()) &&
     statuses.includes(v.status as WeekStatus) &&
     (v.price === null ||
       (typeof v.price === 'number' &&

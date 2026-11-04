@@ -1,3 +1,4 @@
+import { seasonYear } from '@/lib/season';
 import { LocationSection } from './location-section';
 import { GuestReviews } from './guest-reviews';
 import Link from 'next/link';
@@ -72,24 +73,38 @@ export function PublicPage({
   if (page === 'availability')
     return (
       <>
-        <PageIntro
-          eyebrow={fr ? 'Votre été 2027' : 'Your summer 2027'}
-          title={
-            fr
-              ? 'Choisissez votre semaine au soleil.'
-              : 'Choose your week in the sun.'
-          }
-        >
-          {fr
-            ? 'Séjours à la semaine, du samedi au samedi. Un premier pas vers vos prochaines vacances.'
-            : 'Weekly stays, Saturday to Saturday. A first step towards your next holiday.'}
-        </PageIntro>
+        <section className="booking-intro container">
+          <div>
+            <p className="eyebrow">{`${fr ? 'Votre été' : 'Your summer'} ${seasonYear()}`}</p>
+            <h1>
+              {fr
+                ? 'Une semaine à vous. Tout un été en tête.'
+                : 'Your own week. A whole summer to look forward to.'}
+            </h1>
+            <p>
+              {fr
+                ? 'La piscine, les longues soirées et le temps de se retrouver. Choisissez les dates de votre parenthèse à Grasse.'
+                : 'Pool days, long evenings and time together. Choose your dates for a getaway in Grasse.'}
+            </p>
+            <span className="booking-tag">
+              {fr
+                ? '7 nuits · Du samedi au samedi · Jusqu’à 10 personnes'
+                : '7 nights · Saturday to Saturday · Up to 10 guests'}
+            </span>
+          </div>
+          <Photo
+            id="terrace-lounge"
+            alt={
+              fr ? 'Votre terrasse pour les vacances' : 'Your holiday terrace'
+            }
+          />
+        </section>
         <section className="container section-bottom">
           <AvailabilityCalendar locale={locale} weeks={weeks} />
           <p className="fine-print">
             {fr
-              ? 'Les semaines « à confirmer » doivent être vérifiées auprès de la propriétaire. Les disponibilités peuvent évoluer jusqu’à la confirmation du séjour.'
-              : 'Weeks marked “to confirm” must be checked with the owner. Availability may change until your stay is confirmed.'}
+              ? 'Choisissez une semaine disponible. Votre séjour sera confirmé directement avec la propriétaire.'
+              : 'Choose an available week. Your stay will be confirmed directly with the owner.'}
           </p>
         </section>
         <section className="sand section">
@@ -115,8 +130,8 @@ export function PublicPage({
             <table>
               <caption className="sr-only">
                 {fr
-                  ? 'Tarifs des semaines de l’été 2027'
-                  : 'Summer 2027 weekly rates'}
+                  ? `Tarifs des semaines de l’été ${seasonYear()}`
+                  : `Summer ${seasonYear()} weekly rates`}
               </caption>
               <thead>
                 <tr>
@@ -313,7 +328,7 @@ function Home({ locale, weeks }: { locale: Locale; weeks: PublicWeek[] }) {
               : 'Summer stays · Saturday to Saturday'}
           </p>
           <div className="starting-rate">
-            <span>{fr ? 'Été 2027' : 'Summer 2027'}</span>
+            <span>{fr ? `Été ${seasonYear()}` : `Summer ${seasonYear()}`}</span>
             <p>
               {minimum !== null && (fr ? 'Dès ' : 'From ')}
               <strong>{priceLabel(minimum, locale)}</strong>
@@ -674,17 +689,6 @@ function Privacy({ locale }: { locale: Locale }) {
           {fr
             ? 'Aucun cookie publicitaire ni outil de suivi d’audience n’est utilisé. Un cookie de session, valable 24 heures, est utilisé uniquement pour sécuriser l’espace propriétaire.'
             : 'No advertising cookies or audience tracking tools are used. A 24-hour session cookie is used solely to secure the owner area.'}
-        </p>
-        <h2>{fr ? 'Photographies' : 'Photography'}</h2>
-        <p>
-          {fr
-            ? 'Les photos de la villa proviennent de la présentation de la propriétaire et ont été retouchées par IA pour la lumière, les couleurs et la netteté. Certains détails peuvent être réinterprétés. Les vues aériennes sont des reconstitutions IA à partir de captures Google Earth et de photos au sol ; le coucher de soleil est une ambiance créée par IA, et non une prise de vue réelle. Les photos de Grasse proviennent de la présentation originale.'
-            : 'Villa photographs come from the owner’s presentation and were retouched with AI for lighting, colour and clarity. Some details may be reinterpreted. Aerial views are AI reconstructions based on Google Earth screenshots and ground photographs; the sunset is an AI-created atmosphere, not an actual photograph. Grasse photographs come from the original presentation.'}
-        </p>
-        <p>
-          {fr
-            ? 'Les vues de Gourdon et du château de La Napoule sont des illustrations générées par IA, à vocation évocatrice. Le fond de feuillage est également généré.'
-            : 'Views of Gourdon and Château de la Napoule are AI-generated illustrative images. The foliage background is also generated.'}
         </p>
         <p className="notice">
           {fr

@@ -1,3 +1,4 @@
+import { seasonYear } from './season';
 import { DatabaseSync } from 'node:sqlite';
 import { mkdirSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
@@ -15,21 +16,35 @@ export function db() {
   database.exec(`PRAGMA journal_mode=WAL; PRAGMA busy_timeout=5000;
     CREATE TABLE IF NOT EXISTS weeks (start TEXT PRIMARY KEY, end TEXT NOT NULL, price INTEGER, status TEXT NOT NULL, revision INTEGER NOT NULL DEFAULT 0);
     CREATE TABLE IF NOT EXISTS sessions (token TEXT PRIMARY KEY, expires INTEGER NOT NULL);
+    CREATE TABLE IF NOT EXISTS settings (key TEXT PRIMARY KEY, value TEXT NOT NULL);
     CREATE TABLE IF NOT EXISTS limits (key TEXT PRIMARY KEY, count INTEGER NOT NULL, expires INTEGER NOT NULL);`);
-  const insert = database.prepare(
-    'INSERT OR IGNORE INTO weeks (start,end,price,status,revision) VALUES (?,?,?,?,?)',
-  );
-  for (const w of initialWeeks())
-    insert.run(w.start, w.end, w.price, w.status, 0);
+  // One-time migration: the owner explicitly opened the initial season.
+  if (
+    !database
+      .prepare("SELECT key FROM settings WHERE key='availability-v2'")
+      .get()
+  ) {
+    database.exec(
+      "BEGIN IMMEDIATE; UPDATE weeks SET status='available', revision=revision+1 WHERE status='unconfirmed'; INSERT OR IGNORE INTO settings VALUES ('availability-v2','done'); COMMIT;",
+    );
+  }
   return database;
 }
 export function getWeeks(): Week[] {
-  return db()
-    .prepare('SELECT * FROM weeks ORDER BY start')
-    .all() as unknown as Week[];
+  const database = db();
+  const season = initialWeeks();
+  const insert = database.prepare(
+    'INSERT OR IGNORE INTO weeks (start,end,price,status,revision) VALUES (?,?,?,?,?)',
+  );
+  // Run on every read: an already-running server rolls over on October 1.
+  for (const w of season) insert.run(w.start, w.end, w.price, w.status, 0);
+  return database
+    .prepare('SELECT * FROM weeks WHERE start LIKE ? ORDER BY start')
+    .all(`${seasonYear()}-%`)
+    .map((row) => ({ ...row })) as unknown as Week[];
 }
 export function getPublicWeeks() {
-  return getWeeks().map(publicWeek);
+  return getWeeks().map((week) => publicWeek(week));
 }
 export function updateWeek(
   v: Pick<Week, 'start' | 'price' | 'status' | 'revision'>,
