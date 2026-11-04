@@ -3,6 +3,12 @@ import type { NextConfig } from 'next';
 const nextConfig: NextConfig = {
   poweredByHeader: false,
   reactStrictMode: true,
+  images: {
+    localPatterns: [
+      { pathname: '/images/**', search: '' },
+      { pathname: '/images/**', search: '?v=20261103' },
+    ],
+  },
   serverExternalPackages: ['node:sqlite'],
   async headers() {
     return [

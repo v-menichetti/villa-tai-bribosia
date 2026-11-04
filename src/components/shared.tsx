@@ -17,7 +17,7 @@ export function Photo({
   return (
     <div className={`photo ${className}`}>
       <Image
-        src={`/images/${id}.webp`}
+        src={`/images/${id}.webp?v=20261103`}
         alt={alt}
         fill
         sizes="(max-width: 700px) 100vw, (max-width: 1100px) 70vw, 1200px"

@@ -678,8 +678,8 @@ function Privacy({ locale }: { locale: Locale }) {
         <h2>{fr ? 'Photographies' : 'Photography'}</h2>
         <p>
           {fr
-            ? 'Les photos de la villa et de Grasse proviennent de la présentation fournie par la propriétaire.'
-            : 'Photographs of the villa and Grasse come from the presentation supplied by the owner.'}
+            ? 'Les photos de la villa proviennent de la présentation de la propriétaire et ont été retouchées par IA pour la lumière, les couleurs et la netteté. Certains détails peuvent être réinterprétés. Les vues aériennes sont des reconstitutions IA à partir de captures Google Earth et de photos au sol ; le coucher de soleil est une ambiance créée par IA, et non une prise de vue réelle. Les photos de Grasse proviennent de la présentation originale.'
+            : 'Villa photographs come from the owner’s presentation and were retouched with AI for lighting, colour and clarity. Some details may be reinterpreted. Aerial views are AI reconstructions based on Google Earth screenshots and ground photographs; the sunset is an AI-created atmosphere, not an actual photograph. Grasse photographs come from the original presentation.'}
         </p>
         <p>
           {fr

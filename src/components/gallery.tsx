@@ -33,6 +33,11 @@ export function Gallery({ locale }: { locale: Locale }) {
   }
   return (
     <>
+      <p className="container">
+        {fr
+          ? 'Photos de la maison retouchées par IA. Les vues aériennes et le coucher de soleil sont des reconstitutions illustratives.'
+          : 'House photographs retouched with AI. Aerial views and the sunset are illustrative reconstructions.'}
+      </p>
       <div
         className="gallery-filters"
         aria-label={fr ? 'Filtrer les photos' : 'Filter photos'}
@@ -40,6 +45,7 @@ export function Gallery({ locale }: { locale: Locale }) {
         {[
           ['all', fr ? 'Toutes les photos' : 'All photos'],
           ['outdoors', fr ? 'Les extérieurs' : 'Outdoors'],
+          ['aerial', fr ? 'Vues du ciel' : 'Aerial views'],
           ['bedrooms', fr ? 'Les chambres' : 'Bedrooms'],
           ['indoors', fr ? 'La vie dedans' : 'Indoors'],
         ].map(([id, label]) => (
@@ -64,7 +70,7 @@ export function Gallery({ locale }: { locale: Locale }) {
           >
             <span className="gallery-image">
               <Image
-                src={`/images/${p.id}.webp`}
+                src={`/images/${p.id}.webp?v=20261103`}
                 alt={p[locale]}
                 fill
                 sizes="(max-width: 700px) 100vw, 50vw"
@@ -99,7 +105,7 @@ export function Gallery({ locale }: { locale: Locale }) {
             </button>
             <div className="lightbox-photo">
               <Image
-                src={`/images/${visible[selected].id}.webp`}
+                src={`/images/${visible[selected].id}.webp?v=20261103`}
                 alt={visible[selected][locale]}
                 fill
                 sizes="90vw"
