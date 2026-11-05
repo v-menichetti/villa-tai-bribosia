@@ -1,5 +1,13 @@
 # Photo provenance
 
+## Grasse old town — November 5
+
+`grasse-old-town.webp` was generated with built-in ImageGen, exported with Sharp as WebP quality 90, and used in the Explore introduction. It is an illustrative scene inspired by Grasse, not a verified view of a specific Fragonard storefront. The existing Grasse section now describes an old-town walk in French and English, linking to the tourism office and Fragonard.
+
+Prompt: Professional travel editorial photograph of a charming old-town street in Grasse, pastel ochre facades, shutters, stone paving and suspended pink/fuchsia umbrellas. A perfume boutique sign reads exactly “Fragonard”. Warm natural summer morning light, realistic weathered textures, restrained saturation, deep street perspective, landscape 4:3, sign and umbrellas crop-safe. No watermark or caption; illustrative view rather than documentary reconstruction.
+
+Content reference: https://www.paysdegrassetourisme.fr/villes-et-villages/grasse/
+
 ## Facade reframing
 
 On 2026-11-04, built-in ImageGen edited the previously retouched facade at the owner's request. `facade.webp` now has an extended upper sky, reduced gravel foreground and orange trumpet flowers on the existing Campsis vine. Export: WebP quality 92. Original review versions remain in `docs/photography`. Image URLs use `v=20261104b`.

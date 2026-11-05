@@ -581,11 +581,11 @@ function Area({ locale }: { locale: Locale }) {
   return (
     <>
       <PageIntro
-        image="gourdon-generated"
+        image="grasse-old-town"
         imageAlt={
           fr
-            ? 'Les collines et le village de Gourdon'
-            : 'The hills and village of Gourdon'
+            ? 'Ruelle de Grasse, parapluies roses et enseigne Fragonard'
+            : 'A Grasse street with pink umbrellas and a Fragonard sign'
         }
         eyebrow={fr ? 'Autour de la villa' : 'Around the villa'}
         title={
@@ -606,17 +606,32 @@ function Area({ locale }: { locale: Locale }) {
           }
         />
         <div>
-          <p className="eyebrow">01 / Grasse</p>
+          <p className="eyebrow">
+            {fr ? '01 / Visiter la vieille ville' : '01 / Explore the old town'}
+          </p>
           <h2>
             {fr
-              ? 'Flâner au pays des parfums.'
-              : 'Wander through perfume country.'}
+              ? 'Grasse, au fil des ruelles.'
+              : 'Discover Grasse, one street at a time.'}
           </h2>
           <p>
             {fr
-              ? 'Ruelles, façades colorées et patrimoine parfumé : prenez le temps de découvrir le centre historique de Grasse et ses parfumeries, notamment Fragonard.'
-              : 'Narrow streets, colourful façades and perfume heritage: take your time exploring historic Grasse and its perfumeries, including Fragonard.'}
+              ? 'Une promenade entre façades colorées, petites boutiques et placettes : la vieille ville se découvre à pied, au rythme de vos envies. Faites une pause place aux Aires avant de poursuivre dans les ruelles du centre historique.'
+              : 'Stroll past colourful façades, small shops and little squares: the old town is best explored on foot, at your own pace. Pause at Place aux Aires before continuing through the historic streets.'}
           </p>
+          <p>
+            {fr
+              ? 'Prolongez la balade par la découverte des parfumeries, notamment Fragonard. Une parenthèse pleine de couleurs et de senteurs, avant de retrouver le calme de la villa.'
+              : 'Continue with a discovery of the perfumeries, including Fragonard. Enjoy a little colour and fragrance before returning to the peace of the villa.'}
+          </p>
+          <a
+            className="text-link"
+            href="https://www.paysdegrassetourisme.fr/villes-et-villages/grasse/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            {fr ? 'Préparer ma visite de Grasse' : 'Plan my visit to Grasse'} ↗
+          </a>{' '}
           <a
             className="text-link"
             href="https://www.fragonard.com/"
