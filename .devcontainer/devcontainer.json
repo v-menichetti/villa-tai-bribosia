@@ -1,6 +1,6 @@
 {
   "name": "Les Jours de Grasse",
-  "image": "mcr.microsoft.com/devcontainers/javascript-node:1-24-bookworm",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:24-bookworm",
   "forwardPorts": [3000],
   "portsAttributes": {
     "3000": { "label": "Les Jours de Grasse", "onAutoForward": "notify" }
