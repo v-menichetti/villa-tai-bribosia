@@ -2085,20 +2085,22 @@ textarea::placeholder {
   text-align: center;
 }
 .reviews-grid {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 25px;
-  margin-top: 35px;
+  columns: 2;
+  column-gap: 24px;
+  max-width: 1120px;
+  margin: 35px auto 0;
 }
 .reviews-grid figure {
-  grid-column: span 2;
+  display: inline-block;
+  width: 100%;
+  break-inside: avoid;
+  margin: 0 0 24px;
   text-align: left;
   background: #f2eee5;
-  padding: 30px;
-  border-radius: 8px;
-}
-.reviews-grid figure:nth-child(n + 4) {
-  grid-column: span 3;
+  padding: 32px;
+  border: 1px solid #e8e1d6;
+  border-radius: 16px;
+  box-shadow: 0 6px 24px #252a2305;
 }
 .guest-reviews > .text-link {
   margin-top: 28px;
@@ -2110,8 +2112,9 @@ textarea::placeholder {
 }
 .reviews-grid blockquote {
   font-family: 'Lora', serif;
-  font-size: 19px;
+  font-size: 18px;
   line-height: 1.7;
+  text-wrap: pretty;
   margin: 22px 0;
 }
 .reviews-grid figcaption {
@@ -2144,11 +2147,11 @@ textarea::placeholder {
     opacity: 0.15;
   }
   .reviews-grid {
-    grid-template-columns: 1fr;
+    columns: 1;
   }
-  .reviews-grid figure,
-  .reviews-grid figure:nth-child(n + 4) {
-    grid-column: auto;
+  .reviews-grid figure {
+    padding: 24px;
+    margin-bottom: 18px;
   }
   .location-section iframe {
     height: 350px;
