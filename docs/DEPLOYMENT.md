@@ -1,6 +1,8 @@
 # Deployment
 
-Codespaces forwarded-port origins are recognised automatically using `CODESPACES`, `CODESPACE_NAME`, `GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN` and the local port. This fixes owner login returning “Origine non autorisée” when HTTPS forwarding reaches the local HTTP server. Only the exact workspace/port origin is accepted; arbitrary forwarded-host headers are not trusted. Outside Codespaces, production still requires `SITE_URL` to match the public origin. See [GitHub's environment-variable reference](https://docs.github.com/en/codespaces/developing-in-a-codespace/default-environment-variables-for-your-codespace).
+Browser POST/PATCH requests use the browser-controlled `Sec-Fetch-Site: same-origin` signal for CSRF protection, so public-domain changes and reverse-proxy port rewrites do not block owner login. Cross-site and sibling-subdomain requests are rejected; a valid HTTP(S) Origin is also required. Password and session checks remain separate and mandatory. See [MDN Fetch Metadata](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Fetch_metadata).
+
+Clients without Fetch Metadata fall back to exact-origin checks: Codespaces environment variables and the local port, or `SITE_URL` in production (the request origin in development). Keep `SITE_URL` updated for this fallback and public metadata. Arbitrary forwarded-host headers are never trusted. See [GitHub's environment-variable reference](https://docs.github.com/en/codespaces/developing-in-a-codespace/default-environment-variables-for-your-codespace).
 
 Use a single Node 24 server with a persistent disk. Run `npm ci`, `npm run check`, `npm run build`, then `npm start`. Set `DATABASE_PATH` to an absolute path on the persistent disk, outside release directories. SQLite creates and seeds its schema automatically, without overwriting edited weeks.
 

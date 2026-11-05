@@ -64,6 +64,49 @@ afterAll(() => {
   rmSync(dir, { recursive: true, force: true });
 });
 describe('protected owner calendar', () => {
+  it('logs in, edits weeks and logs out across a changed public domain without configuring that domain', async () => {
+    vi.stubEnv('CODESPACES', 'false');
+    const proxied = (
+      path: string,
+      body: unknown,
+      method = 'POST',
+      fetchSite = 'same-origin',
+    ) =>
+      new Request('http://0.0.0.0:80' + path, {
+        method,
+        headers: {
+          origin: 'https://new-villa.example',
+          'sec-fetch-site': fetchSite,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(body),
+      });
+    expect(
+      (
+        await login(
+          proxied('/api/admin/login', { password }, 'POST', 'cross-site'),
+        )
+      ).status,
+    ).toBe(403);
+    const response = await login(proxied('/api/admin/login', { password }));
+    expect(response.status).toBe(200);
+    state.token = response.cookies.get('villa_session')!.value;
+    expect(await authenticated()).toBe(true);
+    const week = getWeeks()[1];
+    expect(
+      (
+        await update(
+          proxied(
+            '/api/admin/weeks',
+            { ...week, status: 'available' },
+            'PATCH',
+          ),
+        )
+      ).status,
+    ).toBe(200);
+    expect((await logout(proxied('/api/admin/logout', {}))).status).toBe(200);
+    expect(await authenticated()).toBe(false);
+  });
   it('authenticates through the Codespaces public URL and permits authenticated week updates', async () => {
     vi.stubEnv('CODESPACES', 'true');
     vi.stubEnv('CODESPACE_NAME', 'villa-test-abc');

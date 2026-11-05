@@ -6,6 +6,48 @@ const request = (origin: string, extra: Record<string, string> = {}) =>
     headers: { origin, ...extra },
   });
 describe('request origin behind Codespaces', () => {
+  it('uses browser provenance across internal port rewrites and domain changes', () => {
+    vi.stubEnv('CODESPACES', '');
+    vi.stubEnv('NODE_ENV', 'production');
+    for (const origin of [
+      'https://glorious-succotash-77r7r7vjg6pcrjvp-3000.app.github.dev',
+      'https://villa.example',
+      'https://new-villa.example:8443',
+    ]) {
+      expect(
+        sameOrigin(
+          new Request('http://0.0.0.0:80/api/admin/login', {
+            headers: { origin, 'sec-fetch-site': 'same-origin' },
+          }),
+        ),
+      ).toBe(true);
+    }
+  });
+  it('rejects cross-site and sibling-subdomain requests even if an origin fallback matches', () => {
+    vi.stubEnv('NODE_ENV', 'development');
+    for (const value of ['cross-site', 'same-site', 'none', 'invalid']) {
+      expect(
+        sameOrigin(
+          request('http://localhost:3000', { 'sec-fetch-site': value }),
+        ),
+      ).toBe(false);
+      expect(
+        sameOrigin(
+          request('https://attacker.invalid', { 'sec-fetch-site': value }),
+        ),
+      ).toBe(false);
+    }
+    for (const origin of [
+      'null',
+      'garbage',
+      'https://villa.example/path',
+      'https://name:secret@villa.example',
+      'file:///tmp/test',
+    ])
+      expect(
+        sameOrigin(request(origin, { 'sec-fetch-site': 'same-origin' })),
+      ).toBe(false);
+  });
   it('accepts this codespace HTTPS origin despite a localhost request URL', () => {
     vi.stubEnv('CODESPACES', 'true');
     vi.stubEnv('CODESPACE_NAME', 'villa-test-abc');

@@ -3,6 +3,24 @@ import { site } from './site';
 export function sameOrigin(request: Request) {
   const origin = request.headers.get('origin');
   if (!origin || origin === 'null') return false;
+  try {
+    const parsed = new URL(origin);
+    if (
+      !['http:', 'https:'].includes(parsed.protocol) ||
+      parsed.origin !== origin
+    )
+      return false;
+  } catch {
+    return false;
+  }
+  // Browser-controlled Fetch Metadata describes the PUBLIC origin relationship,
+  // unaffected by reverse-proxy rewrites, port mappings or domain changes.
+  // Web page JavaScript cannot set Sec-* headers. Never accept same-site here:
+  // another subdomain must not be able to submit owner operations.
+  const fetchSite = request.headers.get('sec-fetch-site');
+  if (fetchSite === 'same-origin') return true;
+  if (fetchSite !== null) return false;
+  // Older clients without Fetch Metadata retain the explicit-origin checks.
   const local = new URL(request.url);
   // Codespaces terminates HTTPS before forwarding to the local Next server.
   // Derive the exact trusted public host from platform environment variables,
