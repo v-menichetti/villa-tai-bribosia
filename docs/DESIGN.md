@@ -10,7 +10,7 @@ The generated reference is never used as production photography. Actual house ph
 
 French is the default, with English routes and date-preserving language links. The responsive gallery uses native modal focus handling. Avoid autoplay and respect reduced motion. Some supplied images are low resolution; obtain higher-resolution originals before launch if possible. See public/images/README.md for credits.
 
-The owner subsequently supplied 300 m² garden and 90 m² indoors, and requested approximate driving times of 25 minutes to the mountains, 20 to the sea (3 minutes to shops from the listing). Google Maps identifies Chemin de la Tête de Lion, not a verified exact entrance. The map is an external Google embed. The new arch/sun emblem is an editable SVG, shared by the header, contact banner and favicon. Autoplay uses ready images, pause controls and reduced-motion support. Example reviews are clearly fictional and development-only; production requires real content in src/content/reviews.ts.
+The owner subsequently supplied 400 m² garden (confirmed November 5) and 90 m² indoors, and requested approximate driving times of 25 minutes to the mountains, 20 to the sea (3 minutes to shops from the listing). Google Maps identifies Chemin de la Tête de Lion, not a verified exact entrance. The map is an external Google embed. The new arch/sun emblem is an editable SVG, shared by the header, contact banner and favicon. Autoplay uses ready images, pause controls and reduced-motion support. Five genuine Airbnb reviews supplied by the owner replace the fictional examples; individual ratings and month/year are shown with a source link. English reviews are labelled translations.
 
 ## November 4 refinement
 

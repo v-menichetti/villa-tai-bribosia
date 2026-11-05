@@ -1,12 +1,11 @@
 import { Star } from 'lucide-react';
-import { guestReviews, exampleReviews } from '@/content/reviews';
+import { guestReviews, reviewSource } from '@/content/reviews';
 import type { Locale } from '@/lib/i18n';
 export function GuestReviews({ locale }: { locale: Locale }) {
-  const demo = !guestReviews.length && process.env.NODE_ENV === 'development';
-  const reviews = demo ? exampleReviews : guestReviews;
+  const reviews = guestReviews;
   if (!reviews.length) return null;
   return (
-    <section className="container section guest-reviews">
+    <section id="avis" className="container section guest-reviews">
       <p className="eyebrow">
         {locale === 'fr'
           ? 'Ils ont séjourné à la villa'
@@ -14,12 +13,17 @@ export function GuestReviews({ locale }: { locale: Locale }) {
       </p>
       <h2>
         {locale === 'fr'
-          ? 'Leurs souvenirs, leurs mots.'
-          : 'Their memories, their words.'}
+          ? 'Les avis de nos voyageurs.'
+          : 'What our guests say.'}
       </h2>
+      <p>
+        {locale === 'fr'
+          ? 'Une sélection de commentaires publiés sur Airbnb, transmis par la propriétaire.'
+          : 'A selection of Airbnb reviews supplied by the owner. Translated from French.'}
+      </p>
       <div className="reviews-grid">
         {reviews.map((r) => (
-          <figure key={r.name + r.source}>
+          <figure key={r.name + r.month}>
             <div aria-label={`${r.rating} / 5`}>
               {Array.from({ length: 5 }, (_, i) => (
                 <Star
@@ -32,18 +36,30 @@ export function GuestReviews({ locale }: { locale: Locale }) {
             </div>
             <blockquote>{r[locale]}</blockquote>
             <figcaption>
-              {r.name} · {r.source}
+              {r.name} ·{' '}
+              <time dateTime={r.month}>
+                {new Intl.DateTimeFormat(locale === 'fr' ? 'fr-FR' : 'en-GB', {
+                  month: 'long',
+                  year: 'numeric',
+                  timeZone: 'UTC',
+                }).format(new Date(r.month + '-01T12:00:00Z'))}
+              </time>{' '}
+              · Airbnb
             </figcaption>
           </figure>
         ))}
       </div>
-      {demo && (
-        <p className="review-demo-label">
-          {locale === 'fr'
-            ? 'Exemples fictifs pour la maquette — masqués en production.'
-            : 'Fictional design examples — hidden in production.'}
-        </p>
-      )}
+      <a
+        className="text-link"
+        href={reviewSource}
+        target="_blank"
+        rel="noreferrer"
+      >
+        {locale === 'fr'
+          ? 'Voir tous les avis sur Airbnb'
+          : 'Read all reviews on Airbnb'}{' '}
+        ↗
+      </a>
     </section>
   );
 }

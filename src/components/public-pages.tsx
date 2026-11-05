@@ -82,13 +82,13 @@ export function PublicPage({
             <p className="eyebrow">{`${fr ? 'Votre été' : 'Your summer'} ${seasonYear()}`}</p>
             <h1>
               {fr
-                ? 'Une semaine à vous. Tout un été en tête.'
-                : 'Your own week. A whole summer to look forward to.'}
+                ? 'Choisissez votre semaine à Grasse.'
+                : 'Choose your week in Grasse.'}
             </h1>
             <p>
               {fr
-                ? 'La piscine, les longues soirées et le temps de se retrouver. Choisissez les dates de votre parenthèse à Grasse.'
-                : 'Pool days, long evenings and time together. Choose your dates for a getaway in Grasse.'}
+                ? 'La villa se loue uniquement en été, du samedi au samedi. Retrouvez les semaines disponibles pour vos vacances en famille.'
+                : 'The villa is available only in summer, from Saturday to Saturday. Find an available week for your family holiday.'}
             </p>
             <span className="booking-tag">
               {fr
@@ -118,12 +118,12 @@ export function PublicPage({
                 {fr ? 'Les tarifs à la semaine' : 'Weekly rates'}
               </p>
               <h2>
-                {fr ? 'L’été, en toute simplicité.' : 'Summer, made simple.'}
+                {fr ? 'Les tarifs de votre séjour.' : 'Rates for your stay.'}
               </h2>
               <p>
                 {fr
-                  ? 'Une réduction est proposée pour plusieurs semaines consécutives. Contactez-nous pour un tarif adapté à votre séjour.'
-                  : 'A reduction is available for consecutive weeks. Contact us for a personalised quote.'}
+                  ? 'Une réduction est proposée dès deux semaines consécutives. Contactez-nous pour un tarif adapté à votre séjour.'
+                  : 'A reduction is available for stays of two or more consecutive weeks. Contact us for a personalised quote.'}
               </p>
               <p className="fine-print">
                 {fr
@@ -180,8 +180,8 @@ export function PublicPage({
           <div className="contact-intro">
             <p className="lead">
               {fr
-                ? 'Une question sur la maison ou une envie de vacances à Grasse ? Partagez vos dates et le nombre de voyageurs. Nous vous répondrons par e-mail.'
-                : 'A question about the villa, or thinking of a holiday in Grasse? Share your dates and the number of guests. We will reply by email.'}
+                ? 'Une question sur la maison ou les disponibilités ? Indiquez vos dates et le nombre de voyageurs : Véronique vous répondra personnellement par e-mail. Pour deux semaines ou plus, demandez votre tarif dégressif.'
+                : 'A question about the house or availability? Share your dates and guest numbers: Véronique will reply personally by email. Ask about a reduced rate for two weeks or more.'}
             </p>
             <div className="contact-details">
               <span>{fr ? '01 · Votre séjour' : '01 · Your stay'}</span>
@@ -195,8 +195,8 @@ export function PublicPage({
               </span>
               <p>
                 {fr
-                  ? 'La propriétaire vous répond personnellement par e-mail.'
-                  : 'The owner will reply personally by email.'}
+                  ? 'Véronique répond à vos questions sur la maison et vous conseille volontiers sur les balades, les villages et les découvertes gourmandes de la région.'
+                  : 'Véronique answers your questions about the house and is happy to suggest walks, villages and local food to discover.'}
               </p>
             </div>
             <h2>Villa Tai Bribosia</h2>
@@ -233,7 +233,7 @@ function Facts({ locale }: { locale: Locale }) {
           icon: CarFront,
           text: fr ? '3 places de parking' : '3 parking spaces',
         },
-        { icon: Trees, text: fr ? '300 m² de jardin' : '300 m² garden' },
+        { icon: Trees, text: fr ? '400 m² de jardin' : '400 m² garden' },
         { icon: HouseIcon, text: fr ? '90 m² d’intérieur' : '90 m² indoors' },
       ].map(({ icon: Icon, text }) => (
         <div key={text}>
@@ -293,14 +293,12 @@ function Home({ locale, weeks }: { locale: Locale; weeks: PublicWeek[] }) {
             {fr ? 'Bienvenue à la villa' : 'Welcome to the villa'}
           </p>
           <h2>
-            {fr
-              ? 'Une maison pour partager l’été'
-              : 'A home for a summer together'}
+            {fr ? 'Une maison familiale au calme' : 'A peaceful family home'}
           </h2>
           <p>
             {fr
-              ? 'À Grasse, profitez d’une maison familiale au calme, avec piscine privée et terrasses aménagées. Baignades, repas dehors et moments ensemble : chacun trouve sa place.'
-              : 'Enjoy a peaceful family home in Grasse, with a private pool and furnished terraces. Swimming, outdoor meals and time together: there’s space for everyone.'}
+              ? 'Dans le quartier résidentiel de Grasse Saint-Jacques, la villa accueille vos vacances en famille avec quatre chambres, une piscine privée et trois terrasses. Profitez du calme, des repas dehors et des baignades, à environ 20 minutes de la mer et 3 minutes des commerces en voiture, selon la circulation.'
+              : 'In the residential Saint-Jacques neighbourhood of Grasse, the villa welcomes families with four bedrooms, a private pool and three terraces. Enjoy peaceful days, outdoor meals and swimming, around 20 minutes from the sea and 3 minutes from shops by car, depending on traffic.'}
           </p>
           <TextLink href={paths[locale].house}>
             {fr ? 'Visiter la maison' : 'Explore the villa'}
@@ -433,13 +431,13 @@ function House({ locale }: { locale: Locale }) {
         }
         title={
           fr
-            ? 'Entrez, vous êtes en vacances.'
-            : 'Come in. Make yourself at home.'
+            ? 'Une villa équipée pour vos vacances en famille.'
+            : 'A well-equipped villa for family holidays.'
         }
       >
         {fr
-          ? 'Quatre chambres, deux salles d’eau et des espaces pour se retrouver, dedans comme dehors.'
-          : 'Four bedrooms, two shower rooms and space to spend time together, indoors and out.'}
+          ? 'La maison de Véronique est sa résidence principale, proposée à la location uniquement l’été. Quatre chambres, deux salles d’eau et deux WC : vous profitez de toute la maison et de ses extérieurs privatifs.'
+          : 'Véronique rents out her own home only during the summer. With four bedrooms, two shower rooms and two toilets, the whole house and its private outdoor spaces are yours to enjoy.'}
       </PageIntro>
       <div className="container">
         <Photo
@@ -511,8 +509,8 @@ function House({ locale }: { locale: Locale }) {
           </h2>
           <p>
             {fr
-              ? 'Deux douches, dont une à l’italienne. Deux serviettes par personne sont fournies ; un sèche-cheveux est disponible dans la première salle d’eau.'
-              : 'Two showers, including a walk-in shower. Two towels per person are provided; a hairdryer is available in the first shower room.'}
+              ? 'Deux douches, dont une à l’italienne. Les draps et deux serviettes de toilette par personne sont fournis ; un sèche-cheveux est disponible dans la première salle d’eau.'
+              : 'Two showers, including a walk-in shower. Bed linen and two bathroom towels per person are provided; a hairdryer is available in the first shower room.'}
           </p>
         </div>
         <div className="photo-pair">

@@ -13,8 +13,8 @@ export function LocationSection({ locale }: { locale: Locale }) {
         </p>
         <h2>
           {fr
-            ? 'Bien ici. Tout près d’ailleurs.'
-            : 'At home here. Close to everywhere.'}
+            ? 'Au calme, près de la mer et des balades.'
+            : 'A peaceful setting, close to the coast and countryside.'}
         </h2>
         <p className="location-address">
           <MapPin size={18} />
