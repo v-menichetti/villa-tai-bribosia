@@ -22,31 +22,38 @@ export function GuestReviews({ locale }: { locale: Locale }) {
           : 'A selection of Airbnb reviews supplied by the owner. Translated from French.'}
       </p>
       <div className="reviews-grid">
-        {reviews.map((r) => (
-          <figure key={r.name + r.month}>
-            <div aria-label={`${r.rating} / 5`}>
-              {Array.from({ length: 5 }, (_, i) => (
-                <Star
-                  key={i}
-                  size={17}
-                  fill={i < r.rating ? 'currentColor' : 'none'}
-                  aria-hidden="true"
-                />
-              ))}
-            </div>
-            <blockquote>{r[locale]}</blockquote>
-            <figcaption>
-              {r.name} ·{' '}
-              <time dateTime={r.month}>
-                {new Intl.DateTimeFormat(locale === 'fr' ? 'fr-FR' : 'en-GB', {
-                  month: 'long',
-                  year: 'numeric',
-                  timeZone: 'UTC',
-                }).format(new Date(r.month + '-01T12:00:00Z'))}
-              </time>{' '}
-              · Airbnb
-            </figcaption>
-          </figure>
+        {[reviews.slice(0, 3), reviews.slice(3)].map((column, index) => (
+          <div className="review-column" key={index}>
+            {column.map((r) => (
+              <figure key={r.name + r.month}>
+                <div aria-label={`${r.rating} / 5`}>
+                  {Array.from({ length: 5 }, (_, i) => (
+                    <Star
+                      key={i}
+                      size={17}
+                      fill={i < r.rating ? 'currentColor' : 'none'}
+                      aria-hidden="true"
+                    />
+                  ))}
+                </div>
+                <blockquote>{r[locale]}</blockquote>
+                <figcaption>
+                  {r.name} ·{' '}
+                  <time dateTime={r.month}>
+                    {new Intl.DateTimeFormat(
+                      locale === 'fr' ? 'fr-FR' : 'en-GB',
+                      {
+                        month: 'long',
+                        year: 'numeric',
+                        timeZone: 'UTC',
+                      },
+                    ).format(new Date(r.month + '-01T12:00:00Z'))}
+                  </time>{' '}
+                  · Airbnb
+                </figcaption>
+              </figure>
+            ))}
+          </div>
         ))}
       </div>
       <a

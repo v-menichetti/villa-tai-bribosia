@@ -3,8 +3,10 @@ import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
-import { dateLabel, paths, priceLabel, type Locale } from '@/lib/i18n';
+import { dateLabel, paths, type Locale } from '@/lib/i18n';
 import { type PublicWeek } from '@/lib/availability';
+import { selectedStay } from '@/lib/stay';
+import { StayPrice } from './stay-price';
 export function AvailabilityCalendar({
   weeks,
   locale,
@@ -18,6 +20,8 @@ export function AvailabilityCalendar({
   const router = useRouter();
   const pathname = usePathname();
   const selected = search.get('arrival');
+  const selection = selectedStay(weeks, selected, search.get('departure'));
+  const [rangeError, setRangeError] = useState(false);
   const selectedWeek = weeks.find(
     (w) => w.start === selected && w.status !== 'unavailable',
   );
@@ -26,9 +30,16 @@ export function AvailabilityCalendar({
   );
   function setSelected(start: string) {
     const week = weeks.find((w) => w.start === start);
-    if (!week) return;
+    if (!week || week.status === 'unavailable' || week.expired) return;
+    const startDate =
+      selectedWeek && start >= selectedWeek.start ? selectedWeek.start : start;
+    if (!selectedStay(weeks, startDate, week.end)) {
+      setRangeError(true);
+      return;
+    }
+    setRangeError(false);
     const query = new URLSearchParams(search.toString());
-    query.set('arrival', week.start);
+    query.set('arrival', startDate);
     query.set('departure', week.end);
     router.replace(pathname + '?' + query.toString(), { scroll: false });
   }
@@ -45,7 +56,7 @@ export function AvailabilityCalendar({
     };
   }, [router]);
   const fr = locale === 'fr';
-  const selection = selectedWeek;
+
   const statusNames = {
     available: fr ? 'Disponible' : 'Available',
     unavailable: fr ? 'Indisponible' : 'Unavailable',
@@ -83,8 +94,10 @@ export function AvailabilityCalendar({
               <button
                 key={iso}
                 disabled={!canSelect}
-                className={`calendar-day ${week?.expired ? 'expired' : week?.status || 'outside'} ${week?.start === selected ? 'selected' : ''}`}
-                aria-pressed={week?.start === selected}
+                className={`calendar-day ${week?.expired ? 'expired' : week?.status || 'outside'} ${Boolean(week && selection?.weeks.some((w) => w.start === week.start)) ? 'selected' : ''}`}
+                aria-pressed={Boolean(
+                  week && selection?.weeks.some((w) => w.start === week.start),
+                )}
                 aria-label={`${dateLabel(iso, locale)}${week ? ` — ${statusNames[week.status]} — ${fr ? 'semaine du' : 'week of'} ${dateLabel(week.start, locale)}` : ''}`}
                 onClick={() => week && setSelected(week.start)}
               >
@@ -141,6 +154,34 @@ export function AvailabilityCalendar({
           </span>
         </div>
       </div>
+      <p className="field-help">
+        {fr
+          ? 'Cliquez sur votre première semaine, puis sur la dernière pour prolonger le séjour. Toutes les semaines entre les deux seront sélectionnées.'
+          : 'Click your first week, then your last week to extend your stay. All weeks in between will be selected.'}
+      </p>
+      {rangeError && (
+        <p className="form-error" role="alert">
+          {fr
+            ? 'Cette période comprend une semaine indisponible. Choisissez une autre période.'
+            : 'This range includes an unavailable week. Please choose another range.'}
+        </p>
+      )}
+      {selected && (
+        <button
+          className="text-link"
+          onClick={() => {
+            const query = new URLSearchParams(search.toString());
+            query.delete('arrival');
+            query.delete('departure');
+            setRangeError(false);
+            router.replace(pathname + '?' + query.toString(), {
+              scroll: false,
+            });
+          }}
+        >
+          {fr ? 'Effacer la sélection' : 'Clear selection'}
+        </button>
+      )}
       <div className="selection-summary" aria-live="polite">
         {selection ? (
           <>
@@ -149,12 +190,7 @@ export function AvailabilityCalendar({
                 {dateLabel(selection.start, locale)} —{' '}
                 {dateLabel(selection.end, locale)}
               </strong>
-              <span>
-                {priceLabel(selection.price, locale)}
-                {selection.price !== null &&
-                  (fr ? ' / semaine' : ' / week')} ·{' '}
-                {statusNames[selection.status]}
-              </span>
+              <StayPrice stay={selection} locale={locale} />
             </div>
             <Link
               className="button"

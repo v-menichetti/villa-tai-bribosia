@@ -31,3 +31,20 @@ Built-in ImageGen created three project assets: `olive-footer.webp` (dark low-co
 ## November 4 updates
 
 The owner requested removing photo-origin labels from the public pages; this file retains the provenance. The overhead aerial is no longer displayed. The oblique aerial was relit with built-in ImageGen: preserve all geometry, change only to restrained warm golden-hour light, no orange filter or new objects. The sunset was regenerated from original pool/terrace photographs and the oblique aerial: a plausible low deck-edge viewpoint across the kidney-shaped pool toward the raised terrace, modest beige villa, coral/gold evening sky, without the foreground spiky plant. Both outputs are illustrative reconstructions and use WebP quality 90. URLs now use `v=20261104`.
+
+## November 6 owner photographs
+
+Six owner-supplied photographs were retouched with built-in ImageGen, preserving architecture and furnishings and improving crop, exposure and natural color. WebP exports use quality 90.
+
+| Source                  | Gallery asset          |
+| ----------------------- | ---------------------- |
+| tai5.jpg                | bedroom-detail.webp    |
+| IMG_20140207_214351.JPG | dining.webp            |
+| IMG_20140207_214202.JPG | living-stove.webp      |
+| terrasse tai 3.jpg      | terrace-overview.webp  |
+| tai 2.jpg               | pool-from-terrace.webp |
+| tai 3.jpg               | garden-flowers.webp    |
+
+The supplied terrasse tai 1.jpg and terrasse tai 2.jpg duplicate existing gallery views and were skipped. IMG_8600.jpeg was missing from the supplied local path; the existing pool photograph remains as the single hero pending reattachment.
+
+Prompt: Retouch this exact owner-supplied villa photograph for a professional rental gallery. Preserve the exact room/garden geometry, furniture, objects, plants, neighbouring buildings, railings and equipment. Only improve natural color balance, exposure and dynamic range, recover bright highlights, lift dark shadows, gently straighten verticals and crop thoughtfully without inventing anything outside frame. Authentic photographic textures, restrained Mediterranean warmth, no HDR halos or oversaturation. Keep all existing features including any covered spa; do not create new amenities. Keep original aspect ratio. No text or watermark.

@@ -1,4 +1,6 @@
 'use client';
+import { StayPrice } from './stay-price';
+import { selectedStay } from '@/lib/stay';
 import { DateSelect } from './date-select';
 import Link from 'next/link';
 import { useState } from 'react';
@@ -26,6 +28,7 @@ export function ContactForm({
   const [departure, setDeparture] = useState(
     weeks.some((w) => w.end === initialDeparture) ? initialDeparture : '',
   );
+  const stay = selectedStay(weeks, arrival, departure);
   const [pending, setPending] = useState(false);
   const [error, setError] = useState('');
   const [sent, setSent] = useState(false);
@@ -138,19 +141,20 @@ export function ContactForm({
           disabled={!arrival}
           placeholder={fr ? 'À préciser' : 'Not decided yet'}
           options={weeks
-            .filter(
-              (w) =>
-                w.end > arrival &&
-                !weeks.some(
-                  (b) =>
-                    b.start >= arrival &&
-                    b.start < w.end &&
-                    b.status === 'unavailable',
-                ),
-            )
+            .filter((w) => selectedStay(weeks, arrival, w.end) !== null)
             .map((w) => ({ value: w.end, label: dateLabel(w.end, locale) }))}
         />
       </div>
+      {stay && (
+        <div className="notice" aria-live="polite">
+          <StayPrice stay={stay} locale={locale} />
+        </div>
+      )}
+      <p className="field-help">
+        {fr
+          ? 'Pour plusieurs semaines consécutives, choisissez une date de départ plus éloignée.'
+          : 'For consecutive weeks, choose a later departure date.'}
+      </p>
       <div className="field-pair">
         <label>
           {fr ? 'Adultes' : 'Adults'}

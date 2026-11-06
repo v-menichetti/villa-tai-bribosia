@@ -1,3 +1,4 @@
+import { PingPongIcon } from './ping-pong-icon';
 import { seasonYear } from '@/lib/season';
 import { LocationSection } from './location-section';
 import { GuestReviews } from './guest-reviews';
@@ -12,7 +13,6 @@ import {
   CookingPot,
   AirVent,
   Flame,
-  CircleDot,
   Baby,
   CarFront,
   ArrowRight,
@@ -127,8 +127,8 @@ export function PublicPage({
               </p>
               <p className="fine-print">
                 {fr
-                  ? 'Arrivée dès 14 h · Départ avant 10 h. Les frais éventuels seront précisés par la propriétaire.'
-                  : 'Check-in from 2 pm · Check-out before 10 am. Any additional charges will be confirmed by the owner.'}
+                  ? 'Arrivée dès 14 h · Départ avant 10 h. Forfait ménage en option : 150 € par séjour.'
+                  : 'Check-in from 2 pm · Check-out before 10 am. Optional cleaning service: €150 per stay.'}
               </p>
             </div>
             <table>
@@ -265,7 +265,7 @@ function Amenities({ locale }: { locale: Locale }) {
               text: fr ? 'Climatisation séjour' : 'Living room AC',
             },
             { icon: Flame, text: fr ? 'Barbecue au gaz' : 'Gas barbecue' },
-            { icon: CircleDot, text: fr ? 'Ping-pong' : 'Table tennis' },
+            { icon: PingPongIcon, text: fr ? 'Ping-pong' : 'Table tennis' },
             { icon: Baby, text: fr ? 'Équipement bébé' : 'Baby equipment' },
             { icon: CarFront, text: fr ? 'Parking privé' : 'Private parking' },
           ].map(({ icon: Icon, text }) => (
@@ -297,8 +297,8 @@ function Home({ locale, weeks }: { locale: Locale; weeks: PublicWeek[] }) {
           </h2>
           <p>
             {fr
-              ? 'Dans le quartier résidentiel de Grasse Saint-Jacques, la villa accueille vos vacances en famille avec quatre chambres, une piscine privée et trois terrasses. Profitez du calme, des repas dehors et des baignades, à environ 20 minutes de la mer et 3 minutes des commerces en voiture, selon la circulation.'
-              : 'In the residential Saint-Jacques neighbourhood of Grasse, the villa welcomes families with four bedrooms, a private pool and three terraces. Enjoy peaceful days, outdoor meals and swimming, around 20 minutes from the sea and 3 minutes from shops by car, depending on traffic.'}
+              ? 'Dans le quartier résidentiel de Grasse Saint-Jacques, la villa accueille vos vacances en famille avec quatre chambres, une piscine privée et trois terrasses. Profitez du calme, des repas dehors et des baignades, à environ 20 minutes de la mer et 3 minutes des commerces en voiture.'
+              : 'In the residential Saint-Jacques neighbourhood of Grasse, the villa welcomes families with four bedrooms, a private pool and three terraces. Enjoy peaceful days, outdoor meals and swimming, around 20 minutes from the sea and 3 minutes from shops by car.'}
           </p>
           <TextLink href={paths[locale].house}>
             {fr ? 'Visiter la maison' : 'Explore the villa'}
@@ -491,8 +491,8 @@ function House({ locale }: { locale: Locale }) {
             </p>
             <p>
               {fr
-                ? 'Dans l’arrière-cuisine : lave-linge et sèche-linge. Pour les petits : chaise haute, rehausseur et lit parapluie sur demande.'
-                : 'A washing machine and dryer are available in the utility room. For little ones: a high chair, booster seat and travel cot on request.'}
+                ? 'Dans l’arrière-cuisine : lave-linge et sèche-linge. Pour les petits : chaise haute et lit parapluie sur demande.'
+                : 'A washing machine and dryer are available in the utility room. For little ones: a high chair and travel cot on request.'}
             </p>
           </div>
         </div>
@@ -509,8 +509,8 @@ function House({ locale }: { locale: Locale }) {
           </h2>
           <p>
             {fr
-              ? 'Deux douches, dont une à l’italienne. Les draps et deux serviettes de toilette par personne sont fournis ; un sèche-cheveux est disponible dans la première salle d’eau.'
-              : 'Two showers, including a walk-in shower. Bed linen and two bathroom towels per person are provided; a hairdryer is available in the first shower room.'}
+              ? 'Deux douches, dont une à l’italienne. Les draps et deux serviettes de toilette par personne sont fournis ; un sèche-cheveux est disponible dans chaque salle d’eau.'
+              : 'Two showers, including a walk-in shower. Bed linen and two bathroom towels per person are provided; a hairdryer is available in each shower room.'}
           </p>
         </div>
         <div className="photo-pair">
@@ -557,8 +557,8 @@ function House({ locale }: { locale: Locale }) {
         <div>
           <p>
             {fr
-              ? 'Arrivée le samedi dès 14 h, départ avant 10 h. Parking privé pour trois voitures et une remorque.'
-              : 'Saturday check-in from 2 pm; check-out before 10 am. Private parking for three cars and a trailer.'}
+              ? 'Arrivée le samedi dès 14 h, départ avant 10 h. Parking privé pour trois voitures et une remorque. Forfait ménage en option : 150 € par séjour.'
+              : 'Saturday check-in from 2 pm; check-out before 10 am. Private parking for three cars and a trailer. Optional cleaning service: €150 per stay.'}
           </p>
           <p>
             {fr

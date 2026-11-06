@@ -1,3 +1,4 @@
+import { selectedStay } from '@/lib/stay';
 import { NextResponse } from 'next/server';
 import { emailConfigured, parseEnquiry, contactRecipient } from '@/lib/enquiry';
 import { consumeLimit, getPublicWeeks } from '@/lib/db';
@@ -19,12 +20,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'invalid' }, { status: 400 });
   if (
     value.arrival &&
-    getPublicWeeks().some(
-      (w) =>
-        w.start >= value.arrival &&
-        w.start < value.departure &&
-        w.status === 'unavailable',
-    )
+    !selectedStay(getPublicWeeks(), value.arrival, value.departure)
   )
     return NextResponse.json({ error: 'unavailable' }, { status: 409 });
   if (!emailConfigured())

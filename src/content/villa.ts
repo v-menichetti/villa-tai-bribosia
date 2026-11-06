@@ -9,6 +9,42 @@ export const villa = {
 } as const;
 export const photographs = [
   {
+    id: 'pool-from-terrace',
+    category: 'outdoors',
+    fr: 'La piscine vue depuis la terrasse',
+    en: 'The pool seen from the terrace',
+  },
+  {
+    id: 'terrace-overview',
+    category: 'outdoors',
+    fr: 'La terrasse, le barbecue et le salon extérieur',
+    en: 'The terrace, barbecue and outdoor lounge',
+  },
+  {
+    id: 'garden-flowers',
+    category: 'outdoors',
+    fr: 'Le jardin fleuri et le fauteuil suspendu',
+    en: 'Flowers and the hanging garden chair',
+  },
+  {
+    id: 'bedroom-detail',
+    category: 'bedrooms',
+    fr: 'Un détail de la chambre',
+    en: 'A closer look at the bedroom',
+  },
+  {
+    id: 'dining',
+    category: 'indoors',
+    fr: 'L’espace repas intérieur',
+    en: 'The indoor dining area',
+  },
+  {
+    id: 'living-stove',
+    category: 'indoors',
+    fr: 'Le séjour et son poêle',
+    en: 'The living room and stove',
+  },
+  {
     id: 'aerial-oblique',
     category: 'aerial',
     fr: 'La maison et sa piscine vues du ciel',

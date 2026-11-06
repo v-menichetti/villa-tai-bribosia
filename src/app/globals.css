@@ -1708,7 +1708,7 @@ textarea::placeholder {
     border: 0;
   }
   .home-intro .eyebrow {
-    margin-bottom: 18px;
+    margin-bottom: 0;
   }
   .intro-photos figure:first-child .photo {
     height: 270px;
@@ -2085,7 +2085,8 @@ textarea::placeholder {
   text-align: center;
 }
 .reviews-grid {
-  columns: 2;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   column-gap: 24px;
   max-width: 1120px;
   margin: 35px auto 0;
@@ -2093,8 +2094,8 @@ textarea::placeholder {
 .reviews-grid figure {
   display: inline-block;
   width: 100%;
-  break-inside: avoid;
-  margin: 0 0 24px;
+  flex: 1;
+  margin: 0;
   text-align: left;
   background: #f2eee5;
   padding: 32px;
@@ -2147,11 +2148,11 @@ textarea::placeholder {
     opacity: 0.15;
   }
   .reviews-grid {
-    columns: 1;
+    grid-template-columns: 1fr;
   }
   .reviews-grid figure {
     padding: 24px;
-    margin-bottom: 18px;
+    margin-bottom: 0;
   }
   .location-section iframe {
     height: 350px;
@@ -2681,4 +2682,22 @@ textarea::placeholder {
   .prose {
     padding: 22px;
   }
+}
+
+.review-column {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.stay-price {
+  display: grid;
+  gap: 8px;
+  margin-top: 12px;
+}
+.stay-price p {
+  margin: 0;
+}
+.stay-price small {
+  display: block;
+  line-height: 1.5;
 }

@@ -13,8 +13,8 @@ export function LocationSection({ locale }: { locale: Locale }) {
         </p>
         <h2>
           {fr
-            ? 'Au calme, près de la mer et des balades.'
-            : 'A peaceful setting, close to the coast and countryside.'}
+            ? 'Au calme, près de la mer et de la montagne.'
+            : 'A peaceful setting, close to the sea and mountains.'}
         </h2>
         <p className="location-address">
           <MapPin size={18} />
@@ -47,8 +47,8 @@ export function LocationSection({ locale }: { locale: Locale }) {
         </div>
         <p className="fine-print">
           {fr
-            ? 'Temps indicatifs en voiture communiqués par la propriétaire, selon la destination et la circulation. La carte situe le chemin, pas l’entrée exacte de la villa.'
-            : 'Approximate driving times supplied by the owner, depending on destination and traffic. The map shows the road, not the exact villa entrance.'}
+            ? 'Temps indicatifs en voiture communiqués par la propriétaire, selon la destination. La carte situe le chemin, pas l’entrée exacte de la villa.'
+            : 'Approximate driving times supplied by the owner, depending on destination. The map shows the road, not the exact villa entrance.'}
         </p>
       </div>
       <iframe
