@@ -9,6 +9,24 @@ export const villa = {
 } as const;
 export const photographs = [
   {
+    id: 'terrace-orchid-parasol',
+    category: 'outdoors',
+    fr: 'À l’ombre du parasol sur la terrasse',
+    en: 'In the shade of the terrace parasol',
+  },
+  {
+    id: 'sunbeds-oleanders-wide',
+    category: 'outdoors',
+    fr: 'Le coin détente bordé de lauriers-roses',
+    en: 'The lounging area beside the oleanders',
+  },
+  {
+    id: 'villa-pool-low-view',
+    category: 'outdoors',
+    fr: 'La maison vue depuis les transats',
+    en: 'The house seen from the sun loungers',
+  },
+  {
     id: 'pool-house-open-umbrella',
     category: 'outdoors',
     fr: 'La maison et la piscine depuis le coin détente',
