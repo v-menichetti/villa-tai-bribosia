@@ -9,6 +9,60 @@ export const villa = {
 } as const;
 export const photographs = [
   {
+    id: 'pool-house-open-umbrella',
+    category: 'outdoors',
+    fr: 'La maison et la piscine depuis le coin détente',
+    en: 'The house and pool from the lounging area',
+  },
+  {
+    id: 'bedroom-desk-window',
+    category: 'bedrooms',
+    fr: 'La chambre avec son bureau et sa fenêtre',
+    en: 'The bedroom with its desk and window',
+  },
+  {
+    id: 'bedroom-garden-door',
+    category: 'bedrooms',
+    fr: 'La chambre ouverte sur le jardin',
+    en: 'The bedroom opening onto the garden',
+  },
+  {
+    id: 'bedroom-wardrobe-wood',
+    category: 'bedrooms',
+    fr: 'La chambre et ses rangements',
+    en: 'The bedroom and its storage',
+  },
+  {
+    id: 'pool-high-view',
+    category: 'outdoors',
+    fr: 'Vue d’ensemble sur la piscine et la terrasse',
+    en: 'An overview of the pool and terrace',
+  },
+  {
+    id: 'living-blue-wall',
+    category: 'indoors',
+    fr: 'Le séjour et son espace repas',
+    en: 'The living and dining area',
+  },
+  {
+    id: 'garden-red-sculpture',
+    category: 'outdoors',
+    fr: 'Le jardin au bord de la piscine',
+    en: 'The garden beside the pool',
+  },
+  {
+    id: 'pool-water-reflections',
+    category: 'outdoors',
+    fr: 'Les reflets du soleil dans la piscine',
+    en: 'Sunlight reflected in the pool',
+  },
+  {
+    id: 'sunbeds-oleanders',
+    category: 'outdoors',
+    fr: 'Les transats à côté des lauriers-roses',
+    en: 'Sun loungers beside the oleanders',
+  },
+  {
     id: 'pool-upper-path',
     category: 'outdoors',
     fr: 'La piscine vue depuis l’allée',

@@ -83,3 +83,21 @@ Nine additional owner photographs lightly retouched with built-in ImageGen. Dist
 Exact shared prompt:
 
 > Use case: lighting-weather, extremely light photographic correction only. The supplied image is the EDIT TARGET, not inspiration. Return almost the same photograph. Preserve exact camera angle, framing, aspect ratio, geometry, all furniture, neighbouring buildings, vehicles, plants and small imperfections. Keep original time of day, real shadows and uneven lighting. Only very slightly lift blocked shadows and tame overbright highlights, subtly correct white balance. Keep muted real greens including the existing artificial grass texture and seams, no new grass, no greener vegetation, no added sunlight, no golden-hour effect, no HDR, no glow, no idealized real-estate rendering, no beautification or new objects. Do not smooth materials or invent details. Keep any tree, car, decoration and reflections exactly where present. Subtle ordinary-camera photograph, believable rather than perfect. No text overlay. Preserve overhead utility wires, pool cover roller, towels, garden fencing and all neighbouring structures when visible. Do not replace the sky or remove belongings. Remove only a tiny accidental fingertip in an image corner if present.
+
+## November 6 bedrooms, living area and pool views
+
+Nine additional owner photographs lightly retouched with built-in ImageGen. Original files unchanged. WebP quality 90.
+
+- IMG_6414.jpeg → pool-house-open-umbrella.webp
+- IMG_8350.jpeg → bedroom-desk-window.webp
+- IMG_8343.jpeg → bedroom-garden-door.webp
+- IMG_8351.jpeg → bedroom-wardrobe-wood.webp
+- IMG_6412.jpeg → pool-high-view.webp
+- IMG_8346.jpeg → living-blue-wall.webp
+- IMG_6849.jpeg → garden-red-sculpture.webp
+- IMG_0224.JPG → pool-water-reflections.webp
+- IMG_0209.JPG → sunbeds-oleanders.webp
+
+Exact shared prompt:
+
+> Use case: lighting-weather, extremely light photographic correction only. The supplied image is the EDIT TARGET, not inspiration. Return almost the same photograph. Preserve exact camera angle, framing, aspect ratio, geometry, all furniture, neighbouring buildings, vehicles, plants and small imperfections. Keep original time of day, real shadows and uneven lighting. Only very slightly lift blocked shadows and tame overbright highlights, subtly correct white balance. Keep muted real greens including the existing artificial grass texture and seams, no new grass, no greener vegetation, no added sunlight, no golden-hour effect, no HDR, no glow, no idealized real-estate rendering, no beautification or new objects. Do not smooth materials or invent details. Keep any tree, car, decoration and reflections exactly where present. Subtle ordinary-camera photograph, believable rather than perfect. No text overlay. Preserve utility wires, towels, pool toys, buckets, all belongings, original sky and neighbouring buildings. Interior photos: only gently neutralize excessive yellow cast without whitening the room or changing wall colors. Preserve patterned bedding.
