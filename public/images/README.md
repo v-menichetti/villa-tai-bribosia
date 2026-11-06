@@ -65,3 +65,21 @@ Eight additional views retouched with built-in ImageGen. The duplicate unnamed (
 Exact shared prompt:
 
 > Use case: lighting-weather, extremely light photographic correction only. The supplied image is the EDIT TARGET, not inspiration. Return almost the same photograph. Preserve exact camera angle, framing, aspect ratio, geometry, all furniture, neighbouring buildings, vehicles, plants and small imperfections. Keep original time of day, real shadows and uneven lighting. Only very slightly lift blocked shadows and tame overbright highlights, subtly correct white balance. Keep muted real greens including the existing artificial grass texture and seams, no new grass, no greener vegetation, no added sunlight, no golden-hour effect, no HDR, no glow, no idealized real-estate rendering, no beautification or new objects. Do not smooth materials or invent details. Keep any tree, car, decoration and reflections exactly where present. Subtle ordinary-camera photograph, believable rather than perfect. No text overlay.
+
+## November 6 additional pool and terrace views
+
+Nine additional owner photographs lightly retouched with built-in ImageGen. Distinct viewpoints; no exact duplicates of existing gallery entries. Original files unchanged. WebP quality 90.
+
+- IMG_8598.jpeg → pool-upper-path.webp
+- IMG_8602.jpeg → villa-pool-wide.webp
+- IMG_8607.jpeg → pool-terrace-railing.webp
+- IMG_0690.jpeg → terrace-umbrella-tables.webp
+- IMG_8603.jpeg → pool-deck-loungers.webp
+- IMG_2240.jpeg → terrace-pool-table.webp
+- IMG_2238.jpeg → terrace-umbrella-wide.webp
+- IMG_6420.jpeg → terrace-sofa-pool.webp
+- IMG_3417.jpeg → garden-ping-pong-front.webp
+
+Exact shared prompt:
+
+> Use case: lighting-weather, extremely light photographic correction only. The supplied image is the EDIT TARGET, not inspiration. Return almost the same photograph. Preserve exact camera angle, framing, aspect ratio, geometry, all furniture, neighbouring buildings, vehicles, plants and small imperfections. Keep original time of day, real shadows and uneven lighting. Only very slightly lift blocked shadows and tame overbright highlights, subtly correct white balance. Keep muted real greens including the existing artificial grass texture and seams, no new grass, no greener vegetation, no added sunlight, no golden-hour effect, no HDR, no glow, no idealized real-estate rendering, no beautification or new objects. Do not smooth materials or invent details. Keep any tree, car, decoration and reflections exactly where present. Subtle ordinary-camera photograph, believable rather than perfect. No text overlay. Preserve overhead utility wires, pool cover roller, towels, garden fencing and all neighbouring structures when visible. Do not replace the sky or remove belongings. Remove only a tiny accidental fingertip in an image corner if present.

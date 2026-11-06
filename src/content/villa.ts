@@ -9,6 +9,60 @@ export const villa = {
 } as const;
 export const photographs = [
   {
+    id: 'pool-upper-path',
+    category: 'outdoors',
+    fr: 'La piscine vue depuis l’allée',
+    en: 'The pool seen from the path',
+  },
+  {
+    id: 'villa-pool-wide',
+    category: 'outdoors',
+    fr: 'La maison et la piscine depuis la terrasse en bois',
+    en: 'The house and pool from the wooden deck',
+  },
+  {
+    id: 'pool-terrace-railing',
+    category: 'outdoors',
+    fr: 'La piscine et ses transats',
+    en: 'The pool and sun loungers',
+  },
+  {
+    id: 'terrace-umbrella-tables',
+    category: 'outdoors',
+    fr: 'Les tables à l’ombre du parasol',
+    en: 'Tables in the shade of the parasol',
+  },
+  {
+    id: 'pool-deck-loungers',
+    category: 'outdoors',
+    fr: 'Les transats face à la maison',
+    en: 'Sun loungers facing the house',
+  },
+  {
+    id: 'terrace-pool-table',
+    category: 'outdoors',
+    fr: 'La table avec vue sur la piscine',
+    en: 'The table overlooking the pool',
+  },
+  {
+    id: 'terrace-umbrella-wide',
+    category: 'outdoors',
+    fr: 'Le coin repas sous le parasol',
+    en: 'The dining area under the parasol',
+  },
+  {
+    id: 'terrace-sofa-pool',
+    category: 'outdoors',
+    fr: 'Le salon extérieur au-dessus de la piscine',
+    en: 'The outdoor lounge above the pool',
+  },
+  {
+    id: 'garden-ping-pong-front',
+    category: 'outdoors',
+    fr: 'Le ping-pong au fond du jardin',
+    en: 'Table tennis at the end of the garden',
+  },
+  {
     id: 'terrace-table-natural',
     category: 'outdoors',
     fr: 'La table sur la terrasse, en fin de journée',
