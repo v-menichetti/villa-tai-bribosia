@@ -48,3 +48,20 @@ Six owner-supplied photographs were retouched with built-in ImageGen, preserving
 The supplied terrasse tai 1.jpg and terrasse tai 2.jpg duplicate existing gallery views and were skipped. IMG_8600.jpeg was missing from the supplied local path; the existing pool photograph remains as the single hero pending reattachment.
 
 Prompt: Retouch this exact owner-supplied villa photograph for a professional rental gallery. Preserve the exact room/garden geometry, furniture, objects, plants, neighbouring buildings, railings and equipment. Only improve natural color balance, exposure and dynamic range, recover bright highlights, lift dark shadows, gently straighten verticals and crop thoughtfully without inventing anything outside frame. Authentic photographic textures, restrained Mediterranean warmth, no HDR halos or oversaturation. Keep all existing features including any covered spa; do not create new amenities. Keep original aspect ratio. No text or watermark.
+
+## November 6 restrained retouches
+
+Eight additional views retouched with built-in ImageGen. The duplicate unnamed (1).jpg (terrace-overview) was skipped. Original files are unchanged. Exports: WebP quality 90.
+
+- unnamed (3).jpg → terrace-table-natural.webp
+- unnamed (2).jpg → terrace-facade-natural.webp
+- unnamed.jpg → bedroom-wood-natural.webp
+- chalet2.jpg → garden-table-tennis-natural.webp
+- salon jardin2.jpg → terrace-dining-natural.webp
+- IMG_20131215_122155.JPG → living-daylight-natural.webp
+- IMG_2985.JPG → pool-neighbourhood-natural.webp
+- IMG_0353.JPG → terrace-shade-natural.webp
+
+Exact shared prompt:
+
+> Use case: lighting-weather, extremely light photographic correction only. The supplied image is the EDIT TARGET, not inspiration. Return almost the same photograph. Preserve exact camera angle, framing, aspect ratio, geometry, all furniture, neighbouring buildings, vehicles, plants and small imperfections. Keep original time of day, real shadows and uneven lighting. Only very slightly lift blocked shadows and tame overbright highlights, subtly correct white balance. Keep muted real greens including the existing artificial grass texture and seams, no new grass, no greener vegetation, no added sunlight, no golden-hour effect, no HDR, no glow, no idealized real-estate rendering, no beautification or new objects. Do not smooth materials or invent details. Keep any tree, car, decoration and reflections exactly where present. Subtle ordinary-camera photograph, believable rather than perfect. No text overlay.

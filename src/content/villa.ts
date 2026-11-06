@@ -9,6 +9,55 @@ export const villa = {
 } as const;
 export const photographs = [
   {
+    id: 'terrace-table-natural',
+    category: 'outdoors',
+    fr: 'La table sur la terrasse, en fin de journée',
+    en: 'The terrace table in late afternoon',
+  },
+  {
+    id: 'terrace-facade-natural',
+    category: 'outdoors',
+    fr: 'La terrasse côté maison',
+    en: 'The terrace beside the house',
+  },
+  {
+    id: 'bedroom-wood-natural',
+    category: 'bedrooms',
+    fr: 'La chambre et sa tête de lit en bois',
+    en: 'The bedroom with its wooden headboard',
+  },
+  {
+    id: 'garden-table-tennis-natural',
+    category: 'outdoors',
+    fr: 'Le ping-pong sous les arbres',
+    en: 'Table tennis beneath the trees',
+  },
+  {
+    id: 'terrace-dining-natural',
+    category: 'outdoors',
+    fr: 'Le coin repas et le salon sous le parasol',
+    en: 'Dining and lounging under the parasol',
+  },
+  {
+    id: 'living-daylight-natural',
+    category: 'indoors',
+    fr: 'Le séjour à la lumière du jour',
+    en: 'The living room in daylight',
+  },
+  {
+    id: 'pool-neighbourhood-natural',
+    category: 'outdoors',
+    fr: 'La piscine et les toits du quartier',
+    en: 'The pool and neighbourhood rooftops',
+  },
+  {
+    id: 'terrace-shade-natural',
+    category: 'outdoors',
+    fr: 'La terrasse à l’ombre du parasol',
+    en: 'The terrace in the shade of the parasol',
+  },
+
+  {
     id: 'pool-from-terrace',
     category: 'outdoors',
     fr: 'La piscine vue depuis la terrasse',
