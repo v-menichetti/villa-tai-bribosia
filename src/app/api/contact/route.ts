@@ -7,7 +7,7 @@ export const runtime = 'nodejs';
 export async function POST(request: Request) {
   if (!sameOrigin(request))
     return NextResponse.json({ error: 'origin' }, { status: 403 });
-  if (!consumeLimit('contact:' + clientKey(request), 5, 15 * 60 * 1000))
+  if (!(await consumeLimit('contact:' + clientKey(request), 5, 15 * 60 * 1000)))
     return NextResponse.json({ error: 'rate' }, { status: 429 });
   let input;
   try {
@@ -20,7 +20,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'invalid' }, { status: 400 });
   if (
     value.arrival &&
-    !selectedStay(getPublicWeeks(), value.arrival, value.departure)
+    !selectedStay(await getPublicWeeks(), value.arrival, value.departure)
   )
     return NextResponse.json({ error: 'unavailable' }, { status: 409 });
   if (!emailConfigured())

@@ -92,7 +92,7 @@ describe('protected owner calendar', () => {
     expect(response.status).toBe(200);
     state.token = response.cookies.get('villa_session')!.value;
     expect(await authenticated()).toBe(true);
-    const week = getWeeks()[1];
+    const week = (await getWeeks())[1];
     expect(
       (
         await update(
@@ -119,7 +119,7 @@ describe('protected owner calendar', () => {
       );
       expect(response.status).toBe(200);
       state.token = response.cookies.get('villa_session')!.value;
-      const week = getWeeks().at(-1)!;
+      const week = (await getWeeks()).at(-1)!;
       expect(
         (
           await update(
@@ -132,7 +132,7 @@ describe('protected owner calendar', () => {
           )
         ).status,
       ).toBe(200);
-      expect(getWeeks().at(-1)!.status).toBe('blocked');
+      expect((await getWeeks()).at(-1)!.status).toBe('blocked');
     } finally {
       vi.stubEnv('CODESPACES', 'false');
     }
@@ -141,7 +141,12 @@ describe('protected owner calendar', () => {
     expect(
       (
         await update(
-          request('/api/admin/weeks', getWeeks()[0], undefined, 'PATCH'),
+          request(
+            '/api/admin/weeks',
+            (await getWeeks())[0],
+            undefined,
+            'PATCH',
+          ),
         )
       ).status,
     ).toBe(401);
@@ -158,14 +163,14 @@ describe('protected owner calendar', () => {
     expect(response.status).toBe(200);
     state.token = response.cookies.get('villa_session')!.value;
     expect(await authenticated()).toBe(true);
-    const week = getWeeks()[0];
+    const week = (await getWeeks())[0];
     expect(Object.getPrototypeOf(week)).toBe(Object.prototype);
     const body = { ...week, status: 'available', price: 1050 };
     expect(
       (await update(request('/api/admin/weeks', body, undefined, 'PATCH')))
         .status,
     ).toBe(200);
-    expect(getWeeks()[0]).toMatchObject({
+    expect((await getWeeks())[0]).toMatchObject({
       status: 'available',
       price: 1050,
       revision: 1,
@@ -240,22 +245,22 @@ describe('mail delivery', () => {
 });
 
 describe('season rollover and owner credentials', () => {
-  it('opens the next season once and preserves both seasons and subsequent edits', () => {
-    const old = getWeeks()[0];
+  it('opens the next season once and preserves both seasons and subsequent edits', async () => {
+    const old = (await getWeeks())[0];
     db()
       .prepare("UPDATE weeks SET status='booked' WHERE start=?")
       .run(old.start);
     vi.setSystemTime(new Date('2027-09-30T21:59:00Z'));
-    expect(getWeeks()[0].start.startsWith('2027')).toBe(true);
+    expect((await getWeeks())[0].start.startsWith('2027')).toBe(true);
     vi.setSystemTime(new Date('2027-09-30T22:00:00Z'));
-    const next = getWeeks();
+    const next = await getWeeks();
     expect(
       next.every((w) => w.start.startsWith('2028') && w.status === 'available'),
     ).toBe(true);
     db()
       .prepare("UPDATE weeks SET status='blocked' WHERE start=?")
       .run(next[0].start);
-    expect(getWeeks()[0].status).toBe('blocked');
+    expect((await getWeeks())[0].status).toBe('blocked');
     expect(
       db().prepare('SELECT status FROM weeks WHERE start=?').get(old.start),
     ).toMatchObject({ status: 'booked' });

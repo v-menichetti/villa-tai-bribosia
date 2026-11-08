@@ -11,9 +11,9 @@ export default async function AdminPage() {
   return (
     <AdminPanel
       key={String(loggedIn)}
-      weeks={loggedIn ? getWeeks() : []}
+      weeks={loggedIn ? await getWeeks() : []}
       loggedIn={loggedIn}
-      configured={adminConfigured()}
+      configured={await adminConfigured()}
     />
   );
 }

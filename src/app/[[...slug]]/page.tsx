@@ -53,7 +53,7 @@ export default async function Page({ params, searchParams }: Props) {
         <PublicPage
           locale={locale}
           page={page}
-          weeks={getPublicWeeks()}
+          weeks={await getPublicWeeks()}
           arrival={
             typeof query.arrival === 'string' ? query.arrival : undefined
           }

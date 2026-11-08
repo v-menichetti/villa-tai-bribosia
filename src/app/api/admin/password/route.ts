@@ -15,7 +15,9 @@ export async function POST(request: Request) {
       { error: 'Reconnectez-vous pour modifier votre mot de passe.' },
       { status: 401 },
     );
-  if (!consumeLimit('password:' + clientKey(request), 5, 15 * 60 * 1000))
+  if (
+    !(await consumeLimit('password:' + clientKey(request), 5, 15 * 60 * 1000))
+  )
     return NextResponse.json(
       { error: 'Réessayez dans 15 minutes.' },
       { status: 429 },
@@ -48,7 +50,7 @@ export async function POST(request: Request) {
     );
   await changePassword(body.newPassword);
   const response = NextResponse.json({ ok: true });
-  response.cookies.set(cookieName, createSession(), {
+  response.cookies.set(cookieName, await createSession(), {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
     sameSite: 'strict',

@@ -20,7 +20,7 @@ export async function PATCH(request: Request) {
       { error: 'Vérifiez le statut et le prix (1 à 20 000 €, ou vide).' },
       { status: 400 },
     );
-  if (!updateWeek(value))
+  if (!(await updateWeek(value)))
     return NextResponse.json(
       {
         error:
@@ -29,7 +29,7 @@ export async function PATCH(request: Request) {
       { status: 409 },
     );
   return NextResponse.json(
-    { weeks: getWeeks() },
+    { weeks: await getWeeks() },
     { headers: { 'Cache-Control': 'no-store' } },
   );
 }
