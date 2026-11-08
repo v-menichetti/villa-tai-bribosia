@@ -10,7 +10,7 @@ export function Hero({ locale }: { locale: Locale }) {
     >
       <Image
         className="hero-image is-active"
-        src="/images/pool.webp?v=20261104b"
+        src="/images/pool-clear-hero.webp"
         alt={
           fr
             ? 'La villa et sa piscine privée'

@@ -166,22 +166,6 @@ export function AvailabilityCalendar({
             : 'This range includes an unavailable week. Please choose another range.'}
         </p>
       )}
-      {selected && (
-        <button
-          className="text-link"
-          onClick={() => {
-            const query = new URLSearchParams(search.toString());
-            query.delete('arrival');
-            query.delete('departure');
-            setRangeError(false);
-            router.replace(pathname + '?' + query.toString(), {
-              scroll: false,
-            });
-          }}
-        >
-          {fr ? 'Effacer la sélection' : 'Clear selection'}
-        </button>
-      )}
       <div className="selection-summary" aria-live="polite">
         {selection ? (
           <>
@@ -192,13 +176,32 @@ export function AvailabilityCalendar({
               </strong>
               <StayPrice stay={selection} locale={locale} />
             </div>
-            <Link
-              className="button"
-              href={`${paths[locale].contact}?arrival=${selection.start}&departure=${selection.end}`}
-            >
-              {fr ? 'Demander ce séjour' : 'Enquire about this stay'}
-              <ArrowRight size={16} />
-            </Link>
+            <div className="selection-actions">
+              <Link
+                className="button"
+                href={`${paths[locale].contact}?arrival=${selection.start}&departure=${selection.end}`}
+              >
+                {fr ? 'Demander ce séjour' : 'Enquire about this stay'}
+                <ArrowRight size={16} />
+              </Link>
+              {selected && (
+                <button
+                  type="button"
+                  className="selection-clear"
+                  onClick={() => {
+                    const query = new URLSearchParams(search.toString());
+                    query.delete('arrival');
+                    query.delete('departure');
+                    setRangeError(false);
+                    router.replace(pathname + '?' + query.toString(), {
+                      scroll: false,
+                    });
+                  }}
+                >
+                  {fr ? 'Effacer la sélection' : 'Clear selection'}
+                </button>
+              )}
+            </div>
           </>
         ) : (
           <p>

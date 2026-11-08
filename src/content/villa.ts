@@ -27,7 +27,7 @@ export const photographs = [
     en: 'The house seen from the sun loungers',
   },
   {
-    id: 'pool-house-open-umbrella',
+    id: 'villa-pool-hero',
     category: 'outdoors',
     fr: 'La maison et la piscine depuis le coin détente',
     en: 'The house and pool from the lounging area',

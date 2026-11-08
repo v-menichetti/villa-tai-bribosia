@@ -113,3 +113,19 @@ Three additional owner photographs lightly retouched with built-in ImageGen. Ori
 Exact shared prompt:
 
 > Use case: lighting-weather, extremely light photographic correction only. The supplied image is the EDIT TARGET, not inspiration. Return almost the same photograph. Preserve exact camera angle, framing, aspect ratio, geometry, all furniture, neighbouring buildings, vehicles, plants and small imperfections. Keep original time of day, real shadows and uneven lighting. Only very slightly lift blocked shadows and tame overbright highlights, subtly correct white balance. Keep muted real greens including the existing artificial grass texture and seams, no new grass, no greener vegetation, no added sunlight, no golden-hour effect, no HDR, no glow, no idealized real-estate rendering, no beautification or new objects. Do not smooth materials or invent details. Keep any tree, car, decoration and reflections exactly where present. Subtle ordinary-camera photograph, believable rather than perfect. No text overlay. Preserve utility wires, pool cover roller, buckets, bags, all belongings, original sky and neighbouring buildings. Do not replace the sky. Preserve portrait or landscape orientation of the original.
+
+## November 8 homepage hero
+
+Built-in ImageGen edit of pool-house-open-umbrella.webp: removed drying laundry, arranged existing outdoor furniture and adjusted colors at the owner’s request. Saved as villa-pool-hero.webp (WebP quality 92), retained in place of the previous gallery view; superseded as homepage hero by pool-clear-hero.webp. Original asset retained.
+
+Prompt:
+
+> Edit this exact villa photograph for the homepage hero. Remove the drying sheet and all laundry draped on the upper terrace railing, reconstruct the existing railing accurately. Neatly arrange the EXISTING outdoor furniture only: align the sun loungers on the left wooden deck with sensible spacing, tidy cushions and arrange existing foreground stools around the existing round table so it looks welcoming and orderly. Do not add furniture. Preserve the exact house architecture, pool shape and size, steps, railing, plants, trees, boundaries, camera position and scene proportions. Subtly improve color balance and exposure, authentic Mediterranean daytime, natural muted greens, clear turquoise water, realistic shadows. No oversaturation, no HDR, no idyllic glow, no architectural alterations. Keep landscape 4:3 framing and the full house and pool visible. Photorealistic, retain material texture and imperfections. No text.
+
+## November 8 revised homepage photograph
+
+Built-in ImageGen edit of pool.webp, selected by the owner instead of the preceding hero proposal. Foreground plant removed, framing shifted upward and colors adjusted. Output: pool-clear-hero.webp, WebP quality 92. Original retained.
+
+Prompt:
+
+> Edit this exact photograph. Remove the entire large spiky plant AND its planter in the foreground, revealing the existing lawn, pool and stone pool surround behind it. Preserve exact architecture, house doors and windows, pool shape, existing furniture, trees and hedges. Reframe slightly upward with a little more sky and less foreground lawn, preserving camera direction. Gently improve colors with restrained natural greens, clean turquoise water, balanced daylight and real shadows. No added objects, no luxury makeover, no oversaturation, no glow. Landscape photograph, no text. Faithful rental photography.

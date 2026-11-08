@@ -45,11 +45,6 @@ export function LocationSection({ locale }: { locale: Locale }) {
             </div>
           ))}
         </div>
-        <p className="fine-print">
-          {fr
-            ? 'Temps indicatifs en voiture communiqués par la propriétaire, selon la destination. La carte situe le chemin, pas l’entrée exacte de la villa.'
-            : 'Approximate driving times supplied by the owner, depending on destination. The map shows the road, not the exact villa entrance.'}
-        </p>
       </div>
       <iframe
         title={
