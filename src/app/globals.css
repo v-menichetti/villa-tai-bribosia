@@ -709,8 +709,8 @@ img {
   color: #36432e;
 }
 .calendar-day.unavailable {
-  background: #e4e3df;
-  color: #77786f;
+  background: #fbe1df;
+  color: #8c3530;
   text-decoration: line-through;
 }
 .calendar-day.outside {
@@ -748,7 +748,7 @@ img {
   background: #e2e8d9;
 }
 .calendar-legend .unavailable {
-  background: #e4e3df;
+  background: #fbe1df;
 }
 .calendar-legend .selected {
   background: var(--olive);
@@ -2299,8 +2299,9 @@ textarea::placeholder {
   cursor: not-allowed;
 }
 .calendar-day.unavailable {
-  background: #f0e5df;
-  color: #967a6a;
+  background: #fbe1df;
+  color: #8c3530;
+  border: 1px solid #e9aaa5;
 }
 .selection-summary {
   border-radius: 14px;
@@ -2376,8 +2377,8 @@ textarea::placeholder {
   transition: background 0.2s;
 }
 .owner-week-row.unavailable {
-  background: #f5eae4;
-  border-color: #e7d6cc;
+  background: #fff0ee;
+  border-color: #e9aaa5;
 }
 .owner-week-row.expired {
   background: #eeedea;
@@ -2413,9 +2414,9 @@ textarea::placeholder {
   flex-shrink: 0;
 }
 .unavailable .week-toggle {
-  background: #edddd3;
-  border-color: #d9bdaa;
-  color: #805c47;
+  background: #fbe1df;
+  border-color: #e9aaa5;
+  color: #8c3530;
 }
 .expired .week-toggle {
   background: #e5e4e0;

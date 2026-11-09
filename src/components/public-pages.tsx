@@ -234,7 +234,7 @@ function Facts({ locale }: { locale: Locale }) {
           text: fr ? '3 places de parking' : '3 parking spaces',
         },
         { icon: Trees, text: fr ? '400 m² de jardin' : '400 m² garden' },
-        { icon: HouseIcon, text: fr ? '90 m² d’intérieur' : '90 m² indoors' },
+        { icon: HouseIcon, text: fr ? '100 m² d’intérieur' : '100 m² indoors' },
       ].map(({ icon: Icon, text }) => (
         <div key={text}>
           <Icon strokeWidth={1.35} aria-hidden="true" />
